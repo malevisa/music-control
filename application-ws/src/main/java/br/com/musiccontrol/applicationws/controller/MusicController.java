@@ -131,10 +131,10 @@ public class MusicController {
         );
     }
 
-    @GetMapping("/filter-musics/{idUser}/{input}/{value}")
-    private ResponseEntity<MusicListDTO> filterMusics(@PathVariable Long idUser, @PathVariable String input, @PathVariable String value) {
+    @GetMapping("/filter-musics/{idUser}/{field}/{value}")
+    private ResponseEntity<MusicListDTO> filterMusics(@PathVariable Long idUser, @PathVariable String field, @PathVariable String value) {
 
-        List<Music> musicList = musicService.filterMusics(idUser, input, value);
+        List<Music> musicList = musicService.filterMusics(idUser, field, value);
         List<MusicListItemDTO> musicResponseDTOList = new ArrayList<>();
 
         musicList.forEach(music -> {

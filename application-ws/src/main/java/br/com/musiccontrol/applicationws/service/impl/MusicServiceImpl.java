@@ -108,10 +108,10 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public List<Music> filterMusics(Long idUser, String campo, String value) {
+    public List<Music> filterMusics(Long idUser, String field, String value) {
 
         if (userRepository.existsById(idUser)) {
-            return switch (campo) {
+            return switch (field) {
                 case "instrument" -> musicRepository.findByIdUserIdUserAndInstrumentStartingWith(idUser, value);
                 case "musicName" -> musicRepository.findByIdUserIdUserAndMusicNameStartingWith(idUser, value);
                 case "musicArtist" -> musicRepository.findByIdUserIdUserAndMusicArtistStartingWith(idUser, value);

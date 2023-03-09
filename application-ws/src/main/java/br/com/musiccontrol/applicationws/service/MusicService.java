@@ -17,5 +17,5 @@ public interface MusicService {
 
     Music getMusicById(Long idMusic);
 
-    List<Music> filterMusics(Long idUser, String campo, String value);
+    List<Music> filterMusics(Long idUser, String field, String value);
 }
