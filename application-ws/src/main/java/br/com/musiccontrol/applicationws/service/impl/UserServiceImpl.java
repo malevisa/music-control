@@ -27,18 +27,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserRequestDTO user) {
-        if(userRepository.findByEmail(user.getEmail()) != null || userRepository.findByLogin(user.getLogin()).isPresent()) {
+        if(userRepository.findByEmailAndIsDeletedFalse(user.getEmail()).isPresent() || userRepository.findByLoginAndIsDeletedFalse(user.getLogin()).isPresent()) {
             throw new UserExistsException("Usuário existente");
         }
 
-        return userRepository.save(
+         User userCreated = userRepository.save(
                 new User(
                         user.getUsername(),
                         user.getLogin(),
                         user.getEmail(),
-                        passwordEncoder.encode(user.getPassword())
+                        passwordEncoder.encode(user.getPassword()),
+                        false
                 )
         );
+
+        UserDetails userDetails = loadUserByUsername(userCreated.getLogin());
+
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(
+                        userDetails,
+                        null,
+                        userDetails.getAuthorities()
+                )
+        );
+
+        return userCreated;
     }
 
     @Override
@@ -48,9 +61,9 @@ public class UserServiceImpl implements UserService {
         boolean match = passwordEncoder.matches(login.getPassword(), userDetails.getPassword());
 
         if(match) {
-            Optional<User> userOptional = userRepository.findByLogin(login.getLogin());
+            Optional<User> userOptional = userRepository.findByLoginAndIsDeletedFalse(login.getLogin());
 
-            if (userOptional.isEmpty()) {
+            if (userOptional.isEmpty() || userOptional.get().getDeleted()) {
                 throw new NotFoundException("Usuário não foi encontrado ou credenciais inválidas.");
             } else {
                 SecurityContextHolder.getContext().setAuthentication(
@@ -66,13 +79,14 @@ public class UserServiceImpl implements UserService {
                         userOptional.get().getUsername(),
                         userOptional.get().getLogin(),
                         userOptional.get().getEmail(),
-                        userOptional.get().getPassword()
+                        userOptional.get().getPassword(),
+                        userOptional.get().getDeleted()
                 );
             }
 
         }
 
-        throw new UserExistsException("Usuario não encontrado.");
+        throw new NotFoundException("Usuario não encontrado.");
 
     }
 
@@ -86,7 +100,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User editUser(Long idUser, UserRequestDTO user) {
-        Optional<User> userOptional = userRepository.findById(idUser);
+        Optional<User> userOptional = userRepository.findByIdUserAndIsDeletedFalse(idUser);
 
         if (userOptional.isPresent()) {
             User foundUser = userOptional.get();
@@ -99,7 +113,7 @@ public class UserServiceImpl implements UserService {
             foundUser.setUsername(user.getUsername());
             foundUser.setLogin(user.getLogin());
             foundUser.setEmail(user.getEmail());
-            foundUser.setPassword(user.getPassword());
+            foundUser.setPassword(passwordEncoder.encode(user.getPassword()));
 
             userRepository.save(foundUser);
 
@@ -113,13 +127,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public String deleteUser(Long idUser) {
 
-        Optional<User> user = userRepository.findById(idUser);
+        Optional<User> user = userRepository.findByIdUserAndIsDeletedFalse(idUser);
 
         if(user.isPresent()) {
 
             SecurityContextHolder.clearContext();
 
-            userRepository.deleteById(idUser);
+            user.get().setDeleted(true);
+
+            userRepository.save(user.get());
 
             return "Usuário excluído com sucesso!";
         }
@@ -131,7 +147,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) {
 
-        Optional<User> loggedUser = userRepository.findByLogin(username);
+        Optional<User> loggedUser = userRepository.findByLoginAndIsDeletedFalse(username);
 
         if(loggedUser.isEmpty()){
             throw new NotFoundException("Usuário não foi encontrado.");

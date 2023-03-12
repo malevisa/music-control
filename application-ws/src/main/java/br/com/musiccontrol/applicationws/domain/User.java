@@ -18,20 +18,23 @@ public class User {
     private String login;
     private String email;
     private String password;
+    private Boolean isDeleted;
 
-    public User(String username, String login, String email, String password) {
+    public User(String username, String login, String email, String password, Boolean isDeleted) {
         this.username = username;
         this.login = login;
         this.email = email;
         this.password = password;
+        this.isDeleted = isDeleted;
     }
 
-    public User(Long idUser, String username, String login, String email, String password) {
+    public User(Long idUser, String username, String login, String email, String password, Boolean isDeleted) {
         this.idUser = idUser;
         this.username = username;
         this.login = login;
         this.email = email;
         this.password = password;
+        this.isDeleted = isDeleted;
     }
 
     public User() {
@@ -75,5 +78,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

@@ -6,12 +6,14 @@ public class UserResponseDTO {
     private String username;
     private String login;
     private String email;
+    private Boolean isDeleted;
 
-    public UserResponseDTO(Long idUser, String username, String login, String email) {
+    public UserResponseDTO(Long idUser, String username, String login, String email, Boolean isDeleted) {
         this.idUser = idUser;
         this.username = username;
         this.login = login;
         this.email = email;
+        this.isDeleted = isDeleted;
     }
 
     public UserResponseDTO() {
@@ -49,4 +51,11 @@ public class UserResponseDTO {
         this.email = email;
     }
 
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
 }

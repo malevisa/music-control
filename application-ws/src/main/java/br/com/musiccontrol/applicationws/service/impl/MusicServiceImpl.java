@@ -24,7 +24,7 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public Music createMusic(MusicRequestDTO music) {
-        Optional<User> userOptional = userRepository.findById(music.getIdUser());
+        Optional<User> userOptional = userRepository.findByIdUserAndIsDeletedFalse(music.getIdUser());
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -36,7 +36,8 @@ public class MusicServiceImpl implements MusicService {
                                     user.getUsername(),
                                     user.getLogin(),
                                     user.getEmail(),
-                                    user.getPassword()
+                                    user.getPassword(),
+                                    user.getDeleted()
                             ),
                             music.getMusicName(),
                             music.getMusicArtist(),
@@ -87,7 +88,7 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public List<Music> getMusicsByUser(Long idUser) {
 
-        if (userRepository.existsById(idUser)) {
+        if (userRepository.existsByIdUserAndIsDeletedFalse(idUser)) {
             return musicRepository.findByIdUserIdUser(idUser);
         }
 
@@ -110,7 +111,7 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public List<Music> filterMusics(Long idUser, String field, String value) {
 
-        if (userRepository.existsById(idUser)) {
+        if (userRepository.existsByIdUserAndIsDeletedFalse(idUser)) {
             return switch (field) {
                 case "instrument" -> musicRepository.findByIdUserIdUserAndInstrumentStartingWith(idUser, value);
                 case "musicName" -> musicRepository.findByIdUserIdUserAndMusicNameStartingWith(idUser, value);

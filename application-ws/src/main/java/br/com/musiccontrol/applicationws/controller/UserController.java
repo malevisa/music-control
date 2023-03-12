@@ -28,7 +28,8 @@ public class UserController {
                         result.getIdUser(),
                         result.getUsername(),
                         result.getLogin(),
-                        result.getEmail()
+                        result.getEmail(),
+                        result.getDeleted()
                 )
         );
     }
@@ -43,13 +44,14 @@ public class UserController {
                         user.getIdUser(),
                         user.getUsername(),
                         user.getEmail(),
-                        user.getLogin()
+                        user.getLogin(),
+                        user.getDeleted()
                 )
         );
     }
 
     @PostMapping("/logoff")
-    public ResponseEntity<String> login() {
+    public ResponseEntity<String> logoff() {
 
         String message = userService.logoff();
 
@@ -67,7 +69,8 @@ public class UserController {
                         userOptional.getIdUser(),
                         userOptional.getUsername(),
                         userOptional.getLogin(),
-                        userOptional.getEmail()
+                        userOptional.getEmail(),
+                        userOptional.getDeleted()
                 )
         );
     }

@@ -32,7 +32,8 @@ public class MusicController {
                                 musicCreated.getIdUser().getIdUser(),
                                 musicCreated.getIdUser().getUsername(),
                                 musicCreated.getIdUser().getLogin(),
-                                musicCreated.getIdUser().getEmail()
+                                musicCreated.getIdUser().getEmail(),
+                                musicCreated.getIdUser().getDeleted()
                         ),
                         musicCreated.getIdMusic(),
                         musicCreated.getMusicName(),
@@ -54,7 +55,8 @@ public class MusicController {
                                 music.getIdUser().getIdUser(),
                                 music.getIdUser().getUsername(),
                                 music.getIdUser().getLogin(),
-                                music.getIdUser().getEmail()
+                                music.getIdUser().getEmail(),
+                                music.getIdUser().getDeleted()
                         ),
                         music.getIdMusic(),
                         music.getMusicName(),
@@ -100,8 +102,9 @@ public class MusicController {
                         new UserResponseDTO(
                                 musicList.get(0).getIdUser().getIdUser(),
                                 musicList.get(0).getIdUser().getUsername(),
+                                musicList.get(0).getIdUser().getLogin(),
                                 musicList.get(0).getIdUser().getEmail(),
-                                musicList.get(0).getIdUser().getLogin()
+                                musicList.get(0).getIdUser().getDeleted()
                         ),
                         musicResponseDTOList
                 )
@@ -120,7 +123,8 @@ public class MusicController {
                                 music.getIdUser().getIdUser(),
                                 music.getIdUser().getUsername(),
                                 music.getIdUser().getLogin(),
-                                music.getIdUser().getEmail()
+                                music.getIdUser().getEmail(),
+                                music.getIdUser().getDeleted()
                         ),
                         music.getIdMusic(),
                         music.getMusicName(),
@@ -156,8 +160,9 @@ public class MusicController {
                         new UserResponseDTO(
                                 musicList.get(0).getIdUser().getIdUser(),
                                 musicList.get(0).getIdUser().getUsername(),
+                                musicList.get(0).getIdUser().getLogin(),
                                 musicList.get(0).getIdUser().getEmail(),
-                                musicList.get(0).getIdUser().getLogin()
+                                musicList.get(0).getIdUser().getDeleted()
                         ),
                         musicResponseDTOList
                 )
