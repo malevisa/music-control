@@ -1,13 +1,13 @@
 package br.com.musiccontrol.applicationws.controller;
 
 import br.com.musiccontrol.applicationws.controller.dto.request.MusicRequestDTO;
-import br.com.musiccontrol.applicationws.controller.dto.response.MusicListDTO;
-import br.com.musiccontrol.applicationws.controller.dto.response.MusicListItemDTO;
-import br.com.musiccontrol.applicationws.controller.dto.response.MusicResponseDTO;
-import br.com.musiccontrol.applicationws.controller.dto.response.UserResponseDTO;
+import br.com.musiccontrol.applicationws.controller.dto.response.*;
 import br.com.musiccontrol.applicationws.domain.Music;
+import br.com.musiccontrol.applicationws.domain.StatisticsBasic;
 import br.com.musiccontrol.applicationws.service.MusicService;
+import jdk.javadoc.doclet.Reporter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -167,6 +167,27 @@ public class MusicController {
                         musicResponseDTOList
                 )
         );
+    }
+
+    @GetMapping("get-user-statistics/{idUser}")
+    public ResponseEntity<UserStatisticsDTO> getUserStatistics(@PathVariable Long idUser) {
+
+        List<StatisticsBasic> mainGenre = musicService.getUserStatisticsMainGenre(idUser);
+        List<StatisticsBasic> mainArtist = musicService.getUserStatisticsMainArtist(idUser);
+        List<StatisticsBasic> mainInstrument = musicService.getUserStatisticsMainInstrument(idUser);
+
+        if (mainGenre.isEmpty() && mainArtist.isEmpty() && mainInstrument.isEmpty()) {
+            return ResponseEntity.status(204).build();
+        }
+
+        return ResponseEntity.status(200).body(
+                new UserStatisticsDTO(
+                        mainGenre,
+                        mainArtist,
+                        mainInstrument
+                )
+        );
+
     }
 
 }
