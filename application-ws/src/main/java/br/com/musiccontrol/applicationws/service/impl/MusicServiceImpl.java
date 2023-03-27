@@ -3,6 +3,7 @@ package br.com.musiccontrol.applicationws.service.impl;
 import br.com.musiccontrol.applicationws.configurations.exceptions.NotFoundException;
 import br.com.musiccontrol.applicationws.controller.dto.request.MusicRequestDTO;
 import br.com.musiccontrol.applicationws.domain.Music;
+import br.com.musiccontrol.applicationws.domain.StatisticsBasic;
 import br.com.musiccontrol.applicationws.domain.User;
 import br.com.musiccontrol.applicationws.repository.MusicRepository;
 import br.com.musiccontrol.applicationws.repository.UserRepository;
@@ -122,5 +123,35 @@ public class MusicServiceImpl implements MusicService {
         }
 
         throw new NotFoundException("Usuário não encontrado.");
+    }
+
+    @Override
+    public List<StatisticsBasic> getUserStatisticsMainGenre(Long idUser) {
+
+        if (userRepository.existsByIdUserAndIsDeletedFalse(idUser)) {
+            return musicRepository.countMusicGenreByIdUser(idUser);
+        }
+
+        throw new NotFoundException("Usuário não encontrado");
+    }
+
+    @Override
+    public List<StatisticsBasic> getUserStatisticsMainArtist(Long idUser) {
+
+        if (userRepository.existsByIdUserAndIsDeletedFalse(idUser)) {
+            return musicRepository.countMusicArtistByIdUser(idUser);
+        }
+
+        throw new NotFoundException("Usuário não encontrado");
+    }
+
+    @Override
+    public List<StatisticsBasic> getUserStatisticsMainInstrument(Long idUser) {
+
+        if (userRepository.existsByIdUserAndIsDeletedFalse(idUser)) {
+            return musicRepository.countMusicInstrumentByIdUser(idUser);
+        }
+
+        throw new NotFoundException("Usuário não encontrado");
     }
 }
