@@ -1,6 +1,7 @@
 package br.com.musiccontrol.applicationws.service;
 
 import br.com.musiccontrol.applicationws.controller.dto.request.LoginRequestDTO;
+import br.com.musiccontrol.applicationws.controller.dto.request.RecoverUserDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.UserRequestDTO;
 import br.com.musiccontrol.applicationws.domain.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,4 +23,6 @@ public interface UserService extends UserDetailsService {
 
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+
+    User recoverUser(RecoverUserDTO recoverUserDTO);
 }
