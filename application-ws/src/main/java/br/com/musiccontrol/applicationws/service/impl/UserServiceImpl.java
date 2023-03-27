@@ -3,6 +3,7 @@ package br.com.musiccontrol.applicationws.service.impl;
 import br.com.musiccontrol.applicationws.configurations.exceptions.NotFoundException;
 import br.com.musiccontrol.applicationws.configurations.exceptions.UserExistsException;
 import br.com.musiccontrol.applicationws.controller.dto.request.LoginRequestDTO;
+import br.com.musiccontrol.applicationws.controller.dto.request.RecoverUserDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.UserRequestDTO;
 import br.com.musiccontrol.applicationws.domain.User;
 import br.com.musiccontrol.applicationws.repository.UserRepository;
@@ -27,8 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserRequestDTO user) {
-        if(userRepository.findByEmailAndIsDeletedFalse(user.getEmail()).isPresent() || userRepository.findByLoginAndIsDeletedFalse(user.getLogin()).isPresent()) {
-            throw new UserExistsException("Usuário existente");
+        if(userRepository.findByEmail(user.getEmail()).isPresent() || userRepository.findByLoginAndIsDeletedFalse(user.getLogin()).isPresent()) {
+            throw new UserExistsException("Usuário existente ou e-mail já utilizado");
         }
 
          User userCreated = userRepository.save(
@@ -122,6 +123,22 @@ public class UserServiceImpl implements UserService {
         }
 
         throw new NotFoundException("Usuário não encontrado.");
+    }
+
+    @Override
+    public User recoverUser(RecoverUserDTO recoverUserDTO) {
+
+        Optional<User> optionalUser = userRepository.findByLoginAndEmailAndIsDeletedTrue(recoverUserDTO.getLogin(), recoverUserDTO.getEmail());
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+
+            user.setDeleted(false);
+
+            return userRepository.save(user);
+        }
+
+        throw new NotFoundException("Usuário não encontrado!");
     }
 
     @Override
