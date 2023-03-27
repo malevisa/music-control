@@ -1,6 +1,7 @@
 package br.com.musiccontrol.applicationws.controller;
 
 import br.com.musiccontrol.applicationws.controller.dto.request.LoginRequestDTO;
+import br.com.musiccontrol.applicationws.controller.dto.request.RecoverUserDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.UserRequestDTO;
 import br.com.musiccontrol.applicationws.controller.dto.response.UserResponseDTO;
 import br.com.musiccontrol.applicationws.domain.User;
@@ -57,6 +58,22 @@ public class UserController {
 
         return ResponseEntity.status(200).body(message);
 
+    }
+
+    @PutMapping("/recover-user")
+    public ResponseEntity<UserResponseDTO> recoverUser(@RequestBody RecoverUserDTO recoverUserDTO) {
+
+        User userOptional = userService.recoverUser(recoverUserDTO);
+
+        return ResponseEntity.status(200).body(
+                new UserResponseDTO(
+                        userOptional.getIdUser(),
+                        userOptional.getUsername(),
+                        userOptional.getLogin(),
+                        userOptional.getEmail(),
+                        userOptional.getDeleted()
+                )
+        );
     }
 
     @PutMapping("/edit-user/{idUser}")
