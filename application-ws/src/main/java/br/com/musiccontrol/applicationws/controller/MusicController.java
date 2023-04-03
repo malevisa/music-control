@@ -5,24 +5,23 @@ import br.com.musiccontrol.applicationws.controller.dto.response.*;
 import br.com.musiccontrol.applicationws.domain.Music;
 import br.com.musiccontrol.applicationws.domain.StatisticsBasic;
 import br.com.musiccontrol.applicationws.service.MusicService;
-import jdk.javadoc.doclet.Reporter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/music")
+@RequestMapping("/musics")
 public class MusicController {
 
     @Autowired
     private MusicService musicService;
 
-    @PostMapping("/create-music")
-    private ResponseEntity<MusicResponseDTO> createMusic(@RequestBody MusicRequestDTO music) {
+    @PostMapping()
+    private ResponseEntity<MusicResponseDTO> createMusic(@RequestBody @Valid MusicRequestDTO music) {
 
         Music musicCreated = musicService.createMusic(music);
 
@@ -44,8 +43,8 @@ public class MusicController {
         );
     }
 
-    @PutMapping("/edit-music/{idMusic}")
-    private ResponseEntity<MusicResponseDTO> editMusic(@RequestBody MusicRequestDTO newMusic, @PathVariable Long idMusic) {
+    @PutMapping("/{idMusic}")
+    private ResponseEntity<MusicResponseDTO> editMusic(@RequestBody @Valid MusicRequestDTO newMusic, @PathVariable Long idMusic) {
 
         Music music = musicService.editMusic(newMusic, idMusic);
 
@@ -67,7 +66,7 @@ public class MusicController {
         );
     }
 
-    @DeleteMapping("/delete-music/{idMusic}")
+    @DeleteMapping("/{idMusic}")
     private ResponseEntity<String> deleteMusic(@PathVariable Long idMusic) {
 
         String message = musicService.deleteMusic(idMusic);
@@ -77,7 +76,7 @@ public class MusicController {
         );
     }
 
-    @GetMapping("/get-music-by-user/{idUser}")
+    @GetMapping("/music/{idUser}")
     private ResponseEntity<MusicListDTO> getMusicsByUser(@PathVariable Long idUser) {
 
         List<Music> musicList = musicService.getMusicsByUser(idUser);
@@ -112,7 +111,7 @@ public class MusicController {
 
     }
 
-    @GetMapping("/get-music-by-id/{idMusic}")
+    @GetMapping("/{idMusic}")
     private ResponseEntity<MusicResponseDTO> getMusicById(@PathVariable Long idMusic) {
 
         Music music = musicService.getMusicById(idMusic);
@@ -135,7 +134,7 @@ public class MusicController {
         );
     }
 
-    @GetMapping("/filter-musics/{idUser}/{field}/{value}")
+    @GetMapping("/{idUser}/{field}/{value}")
     private ResponseEntity<MusicListDTO> filterMusics(@PathVariable Long idUser, @PathVariable String field, @PathVariable String value) {
 
         List<Music> musicList = musicService.filterMusics(idUser, field, value);
@@ -169,7 +168,7 @@ public class MusicController {
         );
     }
 
-    @GetMapping("get-user-statistics/{idUser}")
+    @GetMapping("/user/{idUser}")
     public ResponseEntity<UserStatisticsDTO> getUserStatistics(@PathVariable Long idUser) {
 
         List<StatisticsBasic> mainGenre = musicService.getUserStatisticsMainGenre(idUser);
