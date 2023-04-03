@@ -3,9 +3,9 @@ package br.com.musiccontrol.applicationws.domain;
 public class StatisticsBasic {
 
     private String field;
-    private Integer value;
+    private Long value;
 
-    public StatisticsBasic(String field, Integer value) {
+    public StatisticsBasic(String field, Long value) {
         this.field = field;
         this.value = value;
     }
@@ -18,11 +18,21 @@ public class StatisticsBasic {
         this.field = field;
     }
 
-    public Integer getValue() {
+    public Long getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Long value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Statistic:\n" +
+                        "field: %s\n" +
+                        "value: %d\n",
+                this.field, this.value
+        );
     }
 }
