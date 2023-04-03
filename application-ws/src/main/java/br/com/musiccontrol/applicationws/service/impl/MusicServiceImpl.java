@@ -114,10 +114,10 @@ public class MusicServiceImpl implements MusicService {
 
         if (userRepository.existsByIdUserAndIsDeletedFalse(idUser)) {
             return switch (field) {
-                case "instrument" -> musicRepository.findByIdUserIdUserAndInstrumentStartingWith(idUser, value);
-                case "musicName" -> musicRepository.findByIdUserIdUserAndMusicNameStartingWith(idUser, value);
-                case "musicArtist" -> musicRepository.findByIdUserIdUserAndMusicArtistStartingWith(idUser, value);
-                case "musicGenre" -> musicRepository.findByIdUserIdUserAndMusicGenreStartingWith(idUser, value);
+                case "instrument" -> musicRepository.findByIdUserIdUserAndInstrumentStartingWithIgnoreCase(idUser, value);
+                case "musicName" -> musicRepository.findByIdUserIdUserAndMusicNameStartingWithIgnoreCase(idUser, value);
+                case "musicArtist" -> musicRepository.findByIdUserIdUserAndMusicArtistStartingWithIgnoreCase(idUser, value);
+                case "musicGenre" -> musicRepository.findByIdUserIdUserAndMusicGenreStartingWithIgnoreCase(idUser, value);
                 default -> throw new NotFoundException("Campo não encontrado.");
             };
         }
@@ -128,8 +128,10 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public List<StatisticsBasic> getUserStatisticsMainGenre(Long idUser) {
 
-        if (userRepository.existsByIdUserAndIsDeletedFalse(idUser)) {
-            return musicRepository.countMusicGenreByIdUser(idUser);
+        Optional<User> userOptional = userRepository.findById(idUser);
+
+        if (userOptional.isPresent()) {
+            return musicRepository.getCountMusicGenreByIdUser(userOptional.get());
         }
 
         throw new NotFoundException("Usuário não encontrado");
@@ -138,8 +140,10 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public List<StatisticsBasic> getUserStatisticsMainArtist(Long idUser) {
 
-        if (userRepository.existsByIdUserAndIsDeletedFalse(idUser)) {
-            return musicRepository.countMusicArtistByIdUser(idUser);
+        Optional<User> userOptional = userRepository.findById(idUser);
+
+        if (userOptional.isPresent()) {
+            return musicRepository.countMusicArtistByIdUser(userOptional.get());
         }
 
         throw new NotFoundException("Usuário não encontrado");
@@ -148,8 +152,10 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public List<StatisticsBasic> getUserStatisticsMainInstrument(Long idUser) {
 
-        if (userRepository.existsByIdUserAndIsDeletedFalse(idUser)) {
-            return musicRepository.countMusicInstrumentByIdUser(idUser);
+        Optional<User> userOptional = userRepository.findById(idUser);
+
+        if (userOptional.isPresent()) {
+            return musicRepository.countMusicInstrumentByIdUser(userOptional.get());
         }
 
         throw new NotFoundException("Usuário não encontrado");
