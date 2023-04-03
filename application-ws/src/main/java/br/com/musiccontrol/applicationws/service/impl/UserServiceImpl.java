@@ -28,7 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserRequestDTO user) {
-        if(userRepository.findByEmail(user.getEmail()).isPresent() || userRepository.findByLoginAndIsDeletedFalse(user.getLogin()).isPresent()) {
+        if(userRepository.findByEmail(user.getEmail()).isPresent() ||
+                userRepository.findByLoginAndIsDeletedFalse(user.getLogin()).isPresent()) {
             throw new UserExistsException("Usuário existente ou e-mail já utilizado");
         }
 
@@ -148,7 +149,7 @@ public class UserServiceImpl implements UserService {
 
         if(user.isPresent()) {
 
-            SecurityContextHolder.clearContext();
+            logoff();
 
             user.get().setDeleted(true);
 

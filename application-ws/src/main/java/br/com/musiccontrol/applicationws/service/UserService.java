@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Optional;
-
 public interface UserService extends UserDetailsService {
     User createUser(UserRequestDTO user);
 
@@ -21,8 +19,8 @@ public interface UserService extends UserDetailsService {
 
     String deleteUser(Long idUser);
 
+    User recoverUser(RecoverUserDTO recoverUserDTO);
+
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
-
-    User recoverUser(RecoverUserDTO recoverUserDTO);
 }
