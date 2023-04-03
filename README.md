@@ -2,7 +2,7 @@
 
 Esse projeto foi criado com o intuito de refazer o meu projeto individual da faculdade, agora com conhecimentos mais sólidos e mais experiência na área de tecnologia a API back-end Music-control foi desenvolvida para fortalecer meus conhecimentos nas tecnologias citadas abaixo.
 
-A ideia surgiu a partir da dificuldade que eu tinha em lembrar das músicas que eu aprendi a tocar, com isso, desenvolvi essa API que permite criar, deletar, atualizar, visualizar e outras funcionalidades como filtros e estatísticas do repertório musical.
+A ideia surgiu a partir da dificuldade que eu tinha em lembrar das músicas que aprendi a tocar, com isso, desenvolvi essa API que permite criar, deletar, atualizar, visualizar e outras funcionalidades como filtros e estatísticas do repertório musical.
 
 ## Tecnologias utilizadas :rocket:
 
