@@ -6,6 +6,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,15 +32,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserServiceImpl userService;
 
-    private static final String[] PUBLIC_URI = {
-            "/user/create-user", "/user/login"
-    };
-
-    private static final String[] AUTH_URI = {
-            "/user/logoff", "/user/edit-user", "/user/delete-user", "/music/create-music", "/music/edit-music",
-            "/music/delete-music", "/music/get-music-by-user", "/music/get-music-by-id", "/music/filter-musics"
-    };
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
@@ -52,9 +44,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //        Desabilitando csrf, para que seja possível realizar requisições POST
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(PUBLIC_URI)
+                .antMatchers(HttpMethod.POST, "/users")
                     .permitAll()
-                .antMatchers(AUTH_URI)
+                .antMatchers(HttpMethod.GET, "/users")
+                    .permitAll()
+                .antMatchers(HttpMethod.PUT, "/users")
+                    .permitAll()
+                .antMatchers(HttpMethod.PATCH, "/users")
+                    .permitAll()
+                .antMatchers("/h2-console/**")
+                    .permitAll()
+                .antMatchers("/users/**", "/musics", "/musics/**")
                     .hasAnyRole("USER")
                 .anyRequest()
                     .authenticated()
