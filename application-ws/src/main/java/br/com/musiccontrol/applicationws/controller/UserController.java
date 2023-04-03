@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/create-user")
+    @PostMapping()
     public ResponseEntity<UserResponseDTO> createUser(@RequestBody @Valid UserRequestDTO user) {
 
         User result = userService.createUser(user);
@@ -35,7 +35,7 @@ public class UserController {
         );
     }
 
-    @GetMapping("/login")
+    @GetMapping()
     public ResponseEntity<UserResponseDTO> login(@RequestBody @Valid LoginRequestDTO login) {
 
         User user = userService.login(login);
@@ -51,7 +51,7 @@ public class UserController {
         );
     }
 
-    @PostMapping("/logoff")
+    @PatchMapping()
     public ResponseEntity<String> logoff() {
 
         String message = userService.logoff();
@@ -60,8 +60,8 @@ public class UserController {
 
     }
 
-    @PutMapping("/recover-user")
-    public ResponseEntity<UserResponseDTO> recoverUser(@RequestBody RecoverUserDTO recoverUserDTO) {
+    @PutMapping()
+    public ResponseEntity<UserResponseDTO> recoverUser(@RequestBody @Valid RecoverUserDTO recoverUserDTO) {
 
         User userOptional = userService.recoverUser(recoverUserDTO);
 
@@ -76,7 +76,7 @@ public class UserController {
         );
     }
 
-    @PutMapping("/edit-user/{idUser}")
+    @PutMapping("/{idUser}")
     public ResponseEntity<UserResponseDTO> editUser(@PathVariable Long idUser, @RequestBody @Valid UserRequestDTO user) {
 
         User userOptional = userService.editUser(idUser, user);
@@ -92,7 +92,7 @@ public class UserController {
         );
     }
 
-    @DeleteMapping("/delete-user/{idUser}")
+    @DeleteMapping("/{idUser}")
     public ResponseEntity<String> deleteUser(@PathVariable Long idUser) {
 
         String message = userService.deleteUser(idUser);
