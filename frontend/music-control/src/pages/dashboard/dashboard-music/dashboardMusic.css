@@ -1,0 +1,198 @@
+.home_content {
+    font-family: 'Inter', sans-serif;
+    background-color: #D9D9D9;
+    position: absolute;
+    height: 100%;
+    width: calc(100vw - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+    padding: 2%;
+    color: #0A0908;
+}
+
+.home_content .title {
+    font-size: 25px;
+    font-weight: bold;
+    color: #0A0908;
+}
+
+.sidebar.active ~ .home_content {
+    width: calc(100vw - 240px);
+    left: 240px;
+}
+
+.btn_new {
+    padding: 5px 15px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    margin: 10px 0;
+    background-color: #FF7C0A;
+    cursor: pointer;
+}
+
+.search_box form {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 100%;
+}
+
+.combo_field {
+    position: relative;
+    width: 20%;
+}
+
+.combo_field select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    background-color: #D9D9D9;
+    border: none;
+    font-size: 0.9em;
+    font-weight: 400;
+    padding: 5px 0;
+    cursor: pointer;
+    border-bottom: 2px solid #0A0908;
+    outline: none;
+    padding: 5px;
+    /* border-radius: 5px;
+    cursor: pointer; */
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select:hover {
+    border-bottom: 2px solid #FF7C0A;
+}
+
+.combo_field::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    cursor:pointer;
+    pointer-events:none;
+}
+
+.btn_filter {
+    padding: 5px 7%;
+    border-radius: 5px;
+    font-size: 0.9em;
+    border: none;
+    background-color: #93949C;
+    cursor: pointer;
+}
+
+.btn_filter:hover {
+    background-color: #FF7C0A;
+    transition: 0.5s all ease;
+}
+
+div.box-input {
+    width: 50%;
+    position: relative;
+}
+
+div.box-input label {
+    font-size: 1em;
+    position: absolute;
+    left: 0;
+    bottom: 30%;
+    cursor: text;
+    transition: 0.5s ease-in-out;
+}
+
+div.box-input .input{
+    width: 100%;
+    padding: 5px 0;
+    border: 0;
+    border-bottom: 2px solid #0A0908;
+    outline: 0;
+    background-color: #D9D9D9;
+}
+
+div.box-input .input:focus,
+div.box-input .input:valid {
+    border-bottom: 2px solid #FF7C0A;
+}
+
+div.box-input .input:focus ~ label,
+div.box-input .input:valid ~ label {
+    transform: translateY(-24px);
+    font-size: 12px;
+    color: #FF7C0A;
+}
+
+.box_table {
+    width: 100%;
+    margin-top: 3%;
+    text-align: center;
+    max-height: 65%;
+    overflow-y: scroll;
+}
+
+.box_table::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+.box_table::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.box_table::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 50px;
+}
+
+.box_table table {
+    width: 100%;
+    color: #fffcff;
+    border-radius: 1em;
+}
+
+th {
+    position: sticky;
+    top: 0px;
+    background-color: #0A0908;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 1em;
+}
+
+table .table_body {
+    background-color: #fffcff;
+    color: #0A0908;
+}
+
+.table_body tr {
+    border-top: 10px solid #D9D9D9;
+}
+
+.box_buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.box_buttons button {
+    padding: 5px;
+    width: 40%;
+    background-color: #93949C;
+    border: none;
+    border-radius: 5px;
+    color: #0A0908;
+    cursor: pointer;
+}
+
+.box_buttons button:hover {
+    background-color: #FF7C0A;
+    transition: 0.5s all ease;
+}

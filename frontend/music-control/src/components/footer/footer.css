@@ -1,0 +1,45 @@
+.footer {
+    background-color: #0A0908;
+    color: #FFFCFF;
+    padding: 10vh 10vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.icons nav ul{
+    list-style: none;
+    padding: 0;
+}
+
+.icons nav ul li {
+    background-color: #FFFCFF;
+    color: #0A0908;
+    display: inline-block;
+    margin: 0 10px;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.icon {
+    vertical-align: middle;
+}
+
+.infos {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.infos div {
+    padding: 5px 0;
+}
+
+.date {
+    font-size: 10px;
+    font-weight: lighter;
+}

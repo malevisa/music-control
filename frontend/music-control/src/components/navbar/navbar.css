@@ -1,0 +1,31 @@
+.navbar {
+    background-color: #0A0908;
+    color: #FFFCFF;
+    padding: 5vh 5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.titlebar {
+    font-size: 25px;
+    font-weight: bold;
+    cursor: default;
+}
+
+.menu nav ul{
+    list-style: none;
+}
+
+.menu nav ul li{
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.menu nav ul li:hover{
+    color: #FF7C0A;
+    cursor: pointer;
+    transition: 0.5s;
+}
