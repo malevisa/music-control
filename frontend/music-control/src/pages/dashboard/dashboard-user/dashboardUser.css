@@ -1,0 +1,101 @@
+.user_content {
+    background-color: #D9D9D9;
+    position: absolute;
+    height: 100%;
+    width: calc(100vw - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+    padding: 2%;
+    color: #0A0908;
+}
+
+.sidebar.active ~ .user_content {
+    width: calc(100vw - 240px);
+    left: 240px;
+}
+
+.head_content {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fffcff;
+    padding: 10px 20px;
+    width: 100%;
+    border: 1px solid #0A0908;
+    border-radius: 12px;
+    align-items: self-end;
+}
+
+.head_content .deactivate_account {
+    padding: 5px 15px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    background-color: #93949C;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.head_content .deactivate_account:hover {
+    padding: 5px 15px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    background-color: #FF7C0A;
+    cursor: pointer;
+}
+
+.form_content {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_content div {
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    /* justify-content: baseline; */
+    margin-top: 30px;
+}
+
+.form_content div input {
+    width: 50%;
+    border: none;
+    border-bottom: 1px solid #0A0908;
+    background-color: #D9D9D9;
+    outline: none;
+    padding-bottom: 5px;
+}
+
+.form_content div span {
+    margin-right: 10px;
+    width: 35%;
+}
+
+.form_content .input_user {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #0A0908;
+}
+
+.form_content .btn_content {
+    width: 50%;
+    /* width: max-content; */
+    align-self: end;
+}
+
+.form_content .btn_content button {
+    text-align: center;
+    margin: 0 10px;
+    width: 50%;
+    padding: 5px 15px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    background-color: #93949C;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.form_content .btn_content button:hover {
+    background-color: #FF7C0A;
+}
