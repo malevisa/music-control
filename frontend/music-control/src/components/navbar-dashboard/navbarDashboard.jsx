@@ -3,11 +3,14 @@ import './navbarDashboard.css'
 import { FaMusic, FaUser, FaChartBar } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
 import { AiOutlineMenu } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export default function NavbarDashboard() {
 
     let btn = document.querySelector("#btn");
     let sidebar = document.querySelector(".sidebar");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         let btn = document.querySelector("#btn");
@@ -37,7 +40,7 @@ export default function NavbarDashboard() {
                     </div>
                     <ul className="nav_list">
                         <li>
-                            <a href="">
+                            <a href="" onClick={() => navigate('/your-musics')}>
                                 <div className="icons">
                                     <FaMusic />
                                 </div>
@@ -46,7 +49,7 @@ export default function NavbarDashboard() {
                             <span className="tooltip">Músicas</span>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="" onClick={() => navigate('/your-statistics')}>
                                 <div className="icons">
                                     <FaChartBar />
                                 </div>
@@ -55,7 +58,7 @@ export default function NavbarDashboard() {
                             <span className="tooltip">Estatísticas</span>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="" onClick={() => navigate('/your-perfil')}>
                                 <div className="icons">
                                     <FaUser />
                                 </div>
@@ -66,7 +69,7 @@ export default function NavbarDashboard() {
                     </ul>
                     <ul>
                         <li>
-                            <a href="">
+                            <a href="" onClick={() => navigate('/')}>
                                 <div className="icons">
                                     <ImExit id="log_out" />
                                 </div>
