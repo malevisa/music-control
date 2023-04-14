@@ -1,0 +1,50 @@
+.charts_content {
+    background-color: #D9D9D9;
+    position: absolute;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+    padding: 2%;
+    color: #0A0908;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.sidebar.active ~ .charts_content {
+    width: calc(100% - 240px);
+    left: 240px;
+}
+
+.first_chart_box {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.chart_test {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+    background-color: #FFFCFF;
+    border-radius: 5px;
+    padding: 25px;
+    margin: 10px;
+}
+
+.second_chart_box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.second_chart_box .chart_test {
+    width: 90%;
+    height: max-content;
+}
