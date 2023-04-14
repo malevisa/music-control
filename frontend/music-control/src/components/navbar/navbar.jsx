@@ -1,12 +1,15 @@
 import React from "react";
 import './navbar.css';
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+
+    const navigate = useNavigate();
 
     return (
         <>
             <div className="navbar">
-                <div className="titlebar">Music-Control</div>
+                <div className="titlebar" onClick={() => navigate('/')}>Music-Control</div>
                 <div className="menu">
                     <nav>
                         <ul>
