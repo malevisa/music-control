@@ -11,6 +11,9 @@ import NavbarDashboard from "./components/navbar-dashboard/navbarDashboard";
 import DashboardMusic from "./pages/dashboard/dashboard-music/dashboardMusic";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
+import DashboardStatistics from "./pages/dashboard/dashboard-statistics/dashboardStatistics";
+import DashboardUser from "./pages/dashboard/dashboard-user/dashboardUser";
+import NotFound404 from "./pages/not-found/notFound";
 
 function RoutesComponent() {
 
@@ -21,11 +24,13 @@ function RoutesComponent() {
             <Routes>
 
                 <Route path="/" element={<Index />} />
-                <Route path="/components" element={<ModalDeletarMusica />} />
+                <Route path="/components" element={<NavbarDashboard />} />
                 <Route path="/your-musics" element={<DashboardMusic />} />
+                <Route path="/your-statistics" element={<DashboardStatistics />} />
+                <Route path="/your-perfil" element={<DashboardUser />} />
 
                 {/* pagina de erro */}
-                {/* <Route path="/*" element={<NotFound404 />} /> */}
+                <Route path="/*" element={<NotFound404 />} />
 
             </Routes>
 
