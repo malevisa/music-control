@@ -1,0 +1,11 @@
+.notfound_content {
+    color: #0A0908;
+    background-color: #D9D9D9;
+    width: 100%;
+    padding: 50px 50px 0 50px;
+    text-align: center;
+}
+
+.notfound_content img {
+    width: 50%;
+}
