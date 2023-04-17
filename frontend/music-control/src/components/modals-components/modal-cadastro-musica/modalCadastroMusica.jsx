@@ -6,7 +6,7 @@ export default function ModalCadastroMusica() {
     return (
 
         <>
-            <div id="modal-cadastro-musica" className="modal-container">
+            <div id="modal-register-music" className="modal_container">
                 <div>
                     <div className="modal">
                         <button className="close">x</button>
@@ -14,16 +14,16 @@ export default function ModalCadastroMusica() {
 
                         {/* <div className="form"> */}
                             <form>
-                                <div className="single-input">
+                                <div className="single_input">
                                     <input required className="input" type="text" id="titulo" /> <label htmlFor="titulo">Título</label>
                                 </div>
-                                <div className="single-input">
+                                <div className="single_input">
                                     <input required className="input" type="text" id="artista" /> <label htmlFor="artista">Artista</label>
                                 </div>
-                                <div className="single-input">
+                                <div className="single_input">
                                     <input required className="input" type="text" id="genero" /> <label htmlFor="genero">Gênero</label>
                                 </div>
-                                <div className="single-input">
+                                <div className="single_input">
                                     <input required className="input" type="text" id="instrumento" /> <label htmlFor="instrumento">Instrumento</label>
                                 </div>
 
