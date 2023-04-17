@@ -1,6 +1,6 @@
 /* ModalActiveComponent start */
 
-.modal-container {
+.modal_container {
     font-family: 'Inter', sans-serif;
     width: 100vw;
     height: 100vh;
@@ -87,13 +87,13 @@ form {
     flex-direction: column;
 }
 
-.modal-container .single-input {
+.modal_container .single_input {
     width: 100%;
     position: relative;
     margin-bottom: 30px;
 }
 
-.modal-container .single-input label {
+.modal_container .single_input label {
     font-size: 1em;
     position: absolute;
     left: 0;
@@ -102,7 +102,7 @@ form {
     transition: 0.5s ease-in-out;
 }
 
-.modal-container .single-input .input {
+.modal_container .single_input .input {
     width: 100%;
     padding: 5px 0;
     border: 0;
@@ -110,13 +110,13 @@ form {
     outline: 0;
 }
 
-.modal-container .single-input .input:focus,
-.modal-container .single-input .input:valid {
+.modal_container .single_input .input:focus,
+.modal_container .single_input .input:valid {
     border-bottom: 2px solid #FF7C0A;
 }
 
-.modal-container .single-input .input:focus~label,
-.modal-container .single-input .input:valid~label {
+.modal_container .single_input .input:focus~label,
+.modal_container .single_input .input:valid~label {
     transform: translateY(-24px);
     font-size: 12px;
     color: #FF7C0A;
@@ -145,15 +145,15 @@ form {
     transition: 0.7s;
 }
 
-.modal-container.mostrar {
+.modal_container.show {
     display: flex;
 }
 
-.mostrar div {
+.show div {
     animation: modal .3s;
 }
 
-.footer-modal {
+.footer_modal {
     background-color: #0A0908;
     width: 100%;
     display: flex;
@@ -164,13 +164,13 @@ form {
     padding: 30px 0;
 }
 
-.footer-modal span {
+.footer_modal span {
     color: #EE7B3B;
     padding-left: 5px;
     cursor: pointer;
 }
 
-.forgotpassword {
+.forgot_password {
     margin: 0px 0 40px 0;
     font-size: 0.8em;
     font-weight: bold;
