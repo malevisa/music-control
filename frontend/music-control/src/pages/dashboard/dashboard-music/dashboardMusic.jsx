@@ -10,21 +10,21 @@ function DashboardMusic() {
     useEffect(() => {
         const cadastrarMusica = document.querySelector('.cadastro-musica');
         const cadastro = document.querySelector('.editar-musica');
-        const activateAccount = document.querySelector('.activate-account');
+        const activateAccount = document.querySelector('.activate_account');
         if (cadastrarMusica && cadastro && activateAccount) {
-            cadastrarMusica.addEventListener('click', () => iniciaModal('modal-cadastro-musica'));
-            cadastro.addEventListener('click', () => iniciaModal('modal-deletar-musica'));
-            activateAccount.addEventListener('click', () => iniciaModal('modal-editar-musica'));
+            cadastrarMusica.addEventListener('click', () => iniciaModal('modal-register-music'));
+            cadastro.addEventListener('click', () => iniciaModal('modal-delete-music'));
+            activateAccount.addEventListener('click', () => iniciaModal('modal-edit-music'));
         }
     }, [])
 
     function iniciaModal(modalId) {
         const modal = document.getElementById(modalId);
         if (modal) {
-            modal.classList.add('mostrar');
+            modal.classList.add('show');
             modal.addEventListener('click', (e) => {
                 if (e.target.id === modalId || e.target.className === 'close') {
-                    modal.classList.remove('mostrar')
+                    modal.classList.remove('show')
                 }
             });
         }
@@ -37,7 +37,7 @@ function DashboardMusic() {
             <div className="home_content">
                 <div>
                     <div className="title">Suas músicas</div>
-                    <button className="btn_new" onClick={() => iniciaModal("modal-cadastro-musica")}>Nova música</button>
+                    <button className="btn_new" onClick={() => iniciaModal("modal-register-music")}>Nova música</button>
                 </div>
 
                 <div className="search_box">
@@ -78,8 +78,8 @@ function DashboardMusic() {
                                 <td>Rock</td>
                                 <td>Guitarra</td>
                                 <td className="box_buttons">
-                                    <button onClick={() => iniciaModal("modal-editar-musica")}>Editar</button>
-                                    <button onClick={() => iniciaModal("modal-deletar-musica")}>Deletar</button>
+                                    <button onClick={() => iniciaModal("modal-edit-music")}>Editar</button>
+                                    <button onClick={() => iniciaModal("modal-delete-music")}>Deletar</button>
                                 </td>
                             </tr>
                         </tbody>
