@@ -109,6 +109,7 @@ function DashboardStatistics() {
             <div className="charts_content">
                 <div className="second_chart_box">
                     <div className="chart_test">
+                        <h4>Principais Instrumentos</h4>
                         <canvas id="chart_bar"></canvas>
                     </div>
                 </div>
