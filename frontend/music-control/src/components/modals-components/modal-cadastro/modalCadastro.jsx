@@ -43,28 +43,28 @@ export default function ModalCadastro() {
     return (
 
         <>
-            <div id="modal-cadastro" className="modal-container">
+            <div id="modal-register" className="modal_container">
                 <div>
                     <div className="modal">
                         <button className="close">x</button>
-                        <h1 className="subtitulo">Cadastro</h1>
+                        <h1 className="subtitle">Cadastro</h1>
 
                         <form onSubmit={createUserFunction}>
-                            <div className="single-input">
+                            <div className="single_input">
                                 <input required className="input" type="text" id="nome" onChange={(evento) => setUsernameInput(evento.target.value)} /> <label htmlFor="nome">Nome Completo</label>
                             </div>
-                            <div className="single-input">
+                            <div className="single_input">
                                 <input required className="input" type="text" id="login" onChange={(evento) => setLoginInput(evento.target.value)} /> <label htmlFor="login">Login</label>
                             </div>
-                            <div className="single-input">
+                            <div className="single_input">
                                 <input required className="input" type="text" id="email" onChange={(evento) => setEmailInput(evento.target.value)} /> <label htmlFor="email">E-mail</label>
                             </div>
-                            <div className="single-input">
+                            <div className="single_input">
                                 <input required className="input" type="password" id="senha" onChange={(evento) => setPasswordInput(evento.target.value)} /> <label htmlFor="senha">Senha</label>
                             </div>
                             <button type="submit" className="button">Cadastrar</button>
                         </form>
-                        <div className="footer-modal">
+                        <div className="footer_modal">
                             Já possui conta?<span>Entre!</span>
                         </div>
                     </div>
