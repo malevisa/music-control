@@ -6,7 +6,7 @@ export default function ModalDeletarMusica() {
     return (
 
         <>
-            <div id="modal-deletar-musica" className="modal-container">
+            <div id="modal-delete-music" className="modal_container">
                 <div>
                     <div className="modal">
                         <button className="close">x</button>
