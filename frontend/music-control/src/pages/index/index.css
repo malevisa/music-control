@@ -16,7 +16,7 @@
     width: 40%;
 }
 
-.chamativo {
+.project_description {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -24,18 +24,18 @@
     text-align: center;
 }
 
-.chamativo span {
+.project_description span {
     margin: 50px 0;
     font-size: 1.2em;
 }
 
-.button-container {
+.button_container {
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
-.button-container button{
+.button_container button{
     font-size: 0.9em;
     font-weight: bold;
     width: 45%;
@@ -49,14 +49,14 @@
     border-radius: 5px;
 }
 
-.button-container button:hover{
+.button_container button:hover{
     background-color: #FF7C0A;
     border: 2px solid #0A0908;
     color: #0A0908;
     transition: 0.5s;
 }
 
-.project-container {
+.project_container {
     background-color: #f1f1f1;
     width: 100%;
     display: flex;
@@ -71,7 +71,7 @@
     height: 300px;
 }
 
-.topicos-container {
+.topics_container {
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
@@ -82,7 +82,7 @@
     border-radius: 5px;
 }
 
-.topicos-container button {
+.topics_container button {
     font-size: 0.9em;
     font-weight: bold;
     width: 30%;
@@ -96,27 +96,27 @@
     background-color: #93949C;
 }
 
-.topicos-container button:hover{
+.topics_container button:hover{
     background-color: #FF7C0A;
     color: #0A0908;
     transition: 0.5s;
 }
 
-.project-container img {
+.project_container img {
     width: 40%;
 }
 
-.project-container .container nav {
+.project_container .container nav {
     padding: 30px 20px;
     text-align: start;
 }
 
-.topicos-container .activate {
+.topics_container .activate {
     background-color: #FF7C0A;
     color: #0A0908;
 }
 
-.me-container {
+.me_container {
     background-color: #FFFCFF;
     background-image: url('../../assets/background-image.png');
     background-position: left;
@@ -130,12 +130,12 @@
     flex-direction: row;
 }
 
-.me-container img {
+.me_container img {
     width: 20%;
     padding: 20px 0;
 }
 
-.sobre-mim {
+.about_me {
     width: 30%;
     text-align: center;
     background-color: #f1f1f1;
@@ -145,18 +145,18 @@
     border: 2px solid #0A0908;
 }
 
-.sobre-mim h1 {
+.about_me h1 {
     padding-bottom: 10px;
 }
 
-.sobre-mim span {
+.about_me span {
     font-size: 1.1em;
 }
 
-.container .esconder {
+.container .hide {
     display: none;
 }
 
-.container nav .mostrar {
+.container nav .show {
     display: block;
 }
