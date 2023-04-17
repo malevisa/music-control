@@ -13,9 +13,9 @@ export default function Navbar() {
                 <div className="menu">
                     <nav>
                         <ul>
-                            <li className="cadastro">Cadastro</li>
+                            <li className="register">Cadastro</li>
                             <li className="login">Login</li>
-                            <li className="activate-account">Ativar Conta</li>
+                            <li className="activate_account">Recuperar Conta</li>
                         </ul>
                     </nav>
                 </div>
