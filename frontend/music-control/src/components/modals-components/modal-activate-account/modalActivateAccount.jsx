@@ -6,7 +6,7 @@ export default function modalActivateAccount() {
     return (
 
         <>
-            <div id="modal-activate-account" className="modal-container">
+            <div id="modal-activate-account" className="modal_container">
                 <div>
                     <div className="modal">
                         <button className="close">x</button>
@@ -16,10 +16,10 @@ export default function modalActivateAccount() {
                             <span>Favor inserir o login e o e-mail da conta deletada.</span>
 
                             <form>
-                                <div className="single-input">
+                                <div className="single_input">
                                     <input required className="input" type="text" id="login" /> <label htmlFor="login">Login</label>
                                 </div>
-                                <div className="single-input">
+                                <div className="single_input">
                                     <input required className="input" type="text" id="email" /> <label htmlFor="email">E-mail</label>
                                 </div>
                                 
