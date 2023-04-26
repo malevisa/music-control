@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { userUri } from "../../../service/userApi"
 import '../modalComponentGlobal.css'
 
-export default function ModalCadastro() {
+export default function ModalRegister() {
 
     const [usernameInput, setUsernameInput] = useState();
     const [loginInput, setLoginInput] = useState();

@@ -1,7 +1,7 @@
 import React from "react";
 import '../modalComponentGlobal.css'
 
-export default function ModalCadastroMusica() {
+export default function ModalRegisterMusic() {
 
     return (
 

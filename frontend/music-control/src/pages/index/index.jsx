@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Footer from "../../components/footer/footer";
 import ModalLogin from "../../components/modals-components/modal-login/modalLogin";
-import ModalCadastro from "../../components/modals-components/modal-cadastro/modalCadastro";
+import ModalCadastro from "../../components/modals-components/modal-register/modalCadastro";
 import ModalActivateAccount from "../../components/modals-components/modal-activate-account/modalActivateAccount";
 import ComposeMusicBro from "../../assets/Compose-music-bro.png";
 import PlayingMusicBro from "../../assets/Playing-Music-bro.png";

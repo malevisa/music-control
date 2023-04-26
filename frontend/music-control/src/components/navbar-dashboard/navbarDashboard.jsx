@@ -7,9 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function NavbarDashboard() {
 
-    let btn = document.querySelector("#btn");
-    let sidebar = document.querySelector(".sidebar");
-
     const navigate = useNavigate();
 
     useEffect(() => {

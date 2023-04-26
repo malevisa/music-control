@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import "../dashboard-music/dashboardMusic.css"
 import NavbarDashboard from "../../../components/navbar-dashboard/navbarDashboard";
-import ModalCadastroMusica from "../../../components/modals-components/modal-cadastro-musica/modalCadastroMusica";
-import ModalDeletarMusica from "../../../components/modals-components/modal-deletar-musica/modalDeletarMusica";
-import ModalEditarMusica from "../../../components/modals-components/modal-editar-musica/modalEditarMusica";
+import ModalCadastroMusica from "../../../components/modals-components/modal-register-music/modalCadastroMusica";
+import ModalDeletarMusica from "../../../components/modals-components/modal-delete-music/modalDeletarMusica";
+import ModalEditarMusica from "../../../components/modals-components/modal-edit-music/modalEditarMusica";
 
 function DashboardMusic() {
 

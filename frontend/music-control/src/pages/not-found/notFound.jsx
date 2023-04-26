@@ -14,7 +14,7 @@ function NotFound404() {
 
             <div className="notfound_content">
                 <h1>Desculpe, página não encontrada.</h1>
-                <img src={ImgError} alt="Not-Found Image" />
+                <ImgError />
             </div>
 
             <Footer />

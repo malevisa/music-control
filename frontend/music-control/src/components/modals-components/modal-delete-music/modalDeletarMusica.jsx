@@ -1,7 +1,7 @@
 import React from "react";
 import '../modalComponentGlobal.css'
 
-export default function ModalDeletarMusica() {
+export default function ModalDeleteMusic() {
 
     return (
 

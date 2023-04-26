@@ -1,7 +1,7 @@
 import React from "react";
 import '../modalComponentGlobal.css'
 
-export default function modalActivateAccount() {
+export default function ModalActivateAccount() {
 
     return (
 

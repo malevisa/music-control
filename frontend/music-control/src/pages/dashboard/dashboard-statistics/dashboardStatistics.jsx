@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Chart, elements } from "chart.js/auto";
+import { Chart } from "chart.js/auto";
 import '../dashboard-statistics/dashboardStatistics.css'
 import NavbarDashboard from "../../../components/navbar-dashboard/navbarDashboard";
 
