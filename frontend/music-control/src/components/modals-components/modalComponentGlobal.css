@@ -177,6 +177,17 @@ form {
     cursor: pointer;
 }
 
+.box_notification {
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
 @keyframes modal {
     from {
         opacity: 0;
