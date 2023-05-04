@@ -1,0 +1,61 @@
+.notification {
+    font-family: 'Inter', sans-serif;
+    width: 30%;
+    max-height: 35%;
+    z-index: 2000;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.content_notification {
+    padding: 10px 20px;
+}
+
+.error {
+    background-color: #F12020;
+    color: #FFFCFF;
+}
+
+.success {
+    background-color: #20F14E;
+    color: #0A0908;
+}
+
+.notification.show_notification {
+    display: flex;
+}
+
+.show_notification div {
+    animation: content_notification .3s;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.header h4 {
+    cursor: pointer;
+}
+
+.notification_message {
+    word-wrap: break-word;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+@keyframes content_notification {
+    from {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
