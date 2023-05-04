@@ -52,12 +52,10 @@ export default function ModalRegister() {
 
         }).catch((error) => {
 
-            const opa = document.getElementById('box-notification');
-
-            // setErrors(error.response.data)
+            const boxNotification = document.getElementById('box-notification');
 
             const root = ReactDOM.createRoot(
-                opa
+                boxNotification
             );
 
             const errors = error.response.data;
