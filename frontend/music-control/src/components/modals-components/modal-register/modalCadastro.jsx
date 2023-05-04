@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { userUri } from "../../../service/userApi"
 import '../modalComponentGlobal.css'
+import { useNavigate } from "react-router-dom";
+import * as ReactDOM from 'react-dom/client';
+import Notification from "../../notification/notification";
 
 export default function ModalRegister() {
 
@@ -8,6 +11,17 @@ export default function ModalRegister() {
     const [loginInput, setLoginInput] = useState();
     const [emailInput, setEmailInput] = useState();
     const [passwordInput, setPasswordInput] = useState();
+
+    const navigate = useNavigate();
+
+    function closeNotification() {
+        const notification = document.querySelectorAll('.show_notification');
+
+        for (let index = 0; index < notification.length; index++) {
+            notification.item(index).classList.remove('show_notification');
+        }
+
+    }
 
     async function createUserFunction(evento) {
         evento.preventDefault();
@@ -29,14 +43,50 @@ export default function ModalRegister() {
             sessionStorage.setItem('deleted', response.data.deleted);
             sessionStorage.setItem('loggedUser', true);
 
-            alert("Sucesso!");
-        }).catch((error) => {
-            console.log(error);
-            let status = error.response.status;
-            let message = error.response.data.errors;
+            navigate("/your-musics");
 
-            console.log(status);
-            console.log(message);
+            emailInput.value("");
+            loginInput.value("");
+            usernameInput.value("");
+            passwordInput.value("");
+
+        }).catch((error) => {
+
+            const opa = document.getElementById('box-notification');
+
+            // setErrors(error.response.data)
+
+            const root = ReactDOM.createRoot(
+                opa
+            );
+
+            const errors = error.response.data;
+
+            const elements = []
+
+            errors.length > 0 ? Array.from(errors, (error, index) => {
+
+                elements[index] = <Notification
+                    key={index}
+                    status={false}
+                    title={error.campo == null ? "Erro" : error.campo}
+                    content={error.message}
+                />
+
+            }) : elements[0] = <Notification
+                key={0}
+                status={false}
+                title={errors.campo == null ? "Erro" : errors.campo}
+                content={errors.message}
+            />
+
+            root.render(elements);
+
+            const interval = setInterval(() => {
+                closeNotification();
+                clearInterval(interval);
+            }, 1000 * 7);
+
         })
     }
 
@@ -69,6 +119,9 @@ export default function ModalRegister() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div id="box-notification" className="box_notification">
+
             </div>
         </>
 
