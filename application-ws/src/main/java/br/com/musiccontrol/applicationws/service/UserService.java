@@ -1,5 +1,6 @@
 package br.com.musiccontrol.applicationws.service;
 
+import br.com.musiccontrol.applicationws.controller.dto.request.EditUserRequestDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.LoginRequestDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.RecoverUserDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.UserRequestDTO;
@@ -15,7 +16,7 @@ public interface UserService extends UserDetailsService {
 
     String logoff();
 
-    User editUser(Long idUser, UserRequestDTO user);
+    User editUser(Long idUser, EditUserRequestDTO user);
 
     String deleteUser(Long idUser);
 

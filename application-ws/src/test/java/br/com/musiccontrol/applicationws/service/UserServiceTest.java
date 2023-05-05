@@ -2,6 +2,7 @@ package br.com.musiccontrol.applicationws.service;
 
 import br.com.musiccontrol.applicationws.configurations.exceptions.NotFoundException;
 import br.com.musiccontrol.applicationws.configurations.exceptions.UserExistsException;
+import br.com.musiccontrol.applicationws.controller.dto.request.EditUserRequestDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.LoginRequestDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.RecoverUserDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.UserRequestDTO;
@@ -188,7 +189,11 @@ public class UserServiceTest {
                 firstUser,
                 userService.editUser(
                         firstUser.getIdUser(),
-                        userRequest
+                        new EditUserRequestDTO(
+                                "Sexto usuário de teste",
+                                "sextoTeste",
+                                "teste@editUser.com"
+                        )
                 )
         );
 
@@ -209,7 +214,11 @@ public class UserServiceTest {
                 NotFoundException.class,
                 () -> userService.editUser(
                         100L,
-                        userRequest
+                        new EditUserRequestDTO(
+                                "Sétimo usuário de teste",
+                                "setimoTeste",
+                                "teste@editusernotfound.com"
+                        )
                 )
         );
 
@@ -248,7 +257,11 @@ public class UserServiceTest {
                 UserExistsException.class,
                 () -> userService.editUser(
                         firstUser.getIdUser(),
-                        firstUserRequest
+                        new EditUserRequestDTO(
+                                firstUserRequest.getUsername(),
+                                firstUserRequest.getLogin(),
+                                firstUserRequest.getEmail()
+                        )
                 )
         );
 
@@ -259,7 +272,11 @@ public class UserServiceTest {
                 UserExistsException.class,
                 () -> userService.editUser(
                         secondUser.getIdUser(),
-                        secondUserRequest
+                        new EditUserRequestDTO(
+                                secondUserRequest.getUsername(),
+                                secondUserRequest.getLogin(),
+                                secondUserRequest.getEmail()
+                        )
                 )
         );
 

@@ -9,12 +9,12 @@ export default function Notification(props) {
                 <div>
                     <div className={props.status ? 'content_notification success' : 'content_notification error'}>
                         <div className="header">
-                            <h2 className="title_notification">{props.title} teste</h2>
+                            <h2 className="title_notification">{props.title}</h2>
                             <h4 className="close_notification">X</h4>
                         </div>
                         <div className="notification_message">
                             <span>
-                                {props.content} teste
+                                {props.content}
                             </span>
                         </div>
                     </div>

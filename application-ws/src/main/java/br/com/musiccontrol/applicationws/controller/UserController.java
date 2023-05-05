@@ -1,5 +1,6 @@
 package br.com.musiccontrol.applicationws.controller;
 
+import br.com.musiccontrol.applicationws.controller.dto.request.EditUserRequestDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.LoginRequestDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.RecoverUserDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.UserRequestDTO;
@@ -35,7 +36,7 @@ public class UserController {
         );
     }
 
-    @GetMapping()
+    @PostMapping("/user")
     public ResponseEntity<UserResponseDTO> login(@RequestBody @Valid LoginRequestDTO login) {
 
         User user = userService.login(login);
@@ -77,7 +78,7 @@ public class UserController {
     }
 
     @PutMapping("/{idUser}")
-    public ResponseEntity<UserResponseDTO> editUser(@PathVariable Long idUser, @RequestBody @Valid UserRequestDTO user) {
+    public ResponseEntity<UserResponseDTO> editUser(@PathVariable Long idUser, @RequestBody @Valid EditUserRequestDTO user) {
 
         User userOptional = userService.editUser(idUser, user);
 

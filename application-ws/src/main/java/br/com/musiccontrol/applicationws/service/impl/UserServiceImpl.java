@@ -2,6 +2,7 @@ package br.com.musiccontrol.applicationws.service.impl;
 
 import br.com.musiccontrol.applicationws.configurations.exceptions.NotFoundException;
 import br.com.musiccontrol.applicationws.configurations.exceptions.UserExistsException;
+import br.com.musiccontrol.applicationws.controller.dto.request.EditUserRequestDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.LoginRequestDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.RecoverUserDTO;
 import br.com.musiccontrol.applicationws.controller.dto.request.UserRequestDTO;
@@ -101,7 +102,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User editUser(Long idUser, UserRequestDTO user) {
+    public User editUser(Long idUser, EditUserRequestDTO user) {
         Optional<User> userOptional = userRepository.findByIdUserAndIsDeletedFalse(idUser);
 
         if (userOptional.isPresent()) {
@@ -115,7 +116,7 @@ public class UserServiceImpl implements UserService {
             foundUser.setUsername(user.getUsername());
             foundUser.setLogin(user.getLogin());
             foundUser.setEmail(user.getEmail());
-            foundUser.setPassword(passwordEncoder.encode(user.getPassword()));
+//            foundUser.setPassword(passwordEncoder.encode(user.getPassword()));
 
             userRepository.save(foundUser);
 
