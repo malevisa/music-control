@@ -72,6 +72,10 @@
     width: 35%;
 }
 
+.form_content form {
+    padding: 0;
+}
+
 .form_content .input_user {
     padding-bottom: 30px;
     border-bottom: 1px solid #0A0908;
@@ -98,4 +102,15 @@
 
 .form_content .btn_content button:hover {
     background-color: #FF7C0A;
+}
+
+.box_notification {
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
