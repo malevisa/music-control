@@ -2,24 +2,43 @@ import React, { useEffect } from "react";
 import { Chart } from "chart.js/auto";
 import '../dashboard-statistics/dashboardStatistics.css'
 import NavbarDashboard from "../../../components/navbar-dashboard/navbarDashboard";
+import { musicUri } from "../../../service/musicApi"
 
 function DashboardStatistics() {
 
-    const fetchDataChartBar = async () => {
-        const data = [
-            { instrument: 'Teclado', value: 5 },
-            { instrument: 'Violão', value: 90 },
-            { instrument: 'Ukulele', value: 30 },
-            { instrument: 'Baixo', value: 15 },
-            { instrument: 'Bateria', value: 1 }
-        ];
+    useEffect(() => {
+        getUserStatistics();
+    });
+
+    function getUserStatistics() {
+        musicUri.get(`/user/${sessionStorage.getItem('idUser')}`).then((response) => {
+
+            console.log(response);
+
+            if (response.data.mainInstruments === undefined ||
+                response.data.mainGenres === undefined ||
+                response.data.mainArtists === undefined
+            ) {
+                fetchDataChartBar(response.data.mainInstruments);
+                fetchDataChartDoughnut(response.data.mainGenres);
+                fetchDataChartPolar(response.data.mainArtists);
+            }
+
+        }).catch((error) => {
+
+        })
+    }
+
+    const fetchDataChartBar = async (mainInstruments) => {
+
+        const data = mainInstruments;
 
         new Chart(
             document.getElementById('chart_bar'),
             {
                 type: 'bar',
                 data: {
-                    labels: data.map(row => row.instrument),
+                    labels: data.map(row => row.field),
                     datasets: [
                         {
                             backgroundColor: [
@@ -40,19 +59,19 @@ function DashboardStatistics() {
         );
     }
 
-    const fetchDataChartDoughnut = async () => {
-        const data = [300, 50, 100, 100, 100];
+    const fetchDataChartDoughnut = async (mainGenres) => {
+        const data = mainGenres;
 
         new Chart(
             document.getElementById('chart_doughnut'),
             {
                 type: 'doughnut',
                 data: {
-                    labels: ['teste1', 'teste2', 'teste3', 'teste4', 'teste5'],
+                    labels: data.map(row => row.field),
                     datasets: [
                         {
                             label: 'Principais Gêneros Musicais',
-                            data: data.map(row => row),
+                            data: data.map(row => row.value),
                             backgroundColor: [
                                 '#FF7C0A',
                                 '#FFEE30',
@@ -68,19 +87,19 @@ function DashboardStatistics() {
         );
     }
 
-    const fetchDataChartPolar = async () => {
-        const data = [11, 16, 7, 3, 14];
+    const fetchDataChartPolar = async (mainArtists) => {
+        const data = mainArtists;
 
         new Chart(
             document.getElementById('chart_polarArea'),
             {
                 type: 'polarArea',
                 data: {
-                    labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue'],
+                    labels: data.map(row => row.field),
                     datasets: [
                         {
                             label: 'Acquisitions by year',
-                            data: data.map(row => row),
+                            data: data.map(row => row.value),
                             backgroundColor: [
                                 '#FF7C0A',
                                 '#FFEE30',
@@ -95,12 +114,6 @@ function DashboardStatistics() {
             }
         );
     }
-
-    useEffect(() => {
-        fetchDataChartBar().catch(console.error);
-        fetchDataChartDoughnut().catch(console.error);
-        fetchDataChartPolar().catch(console.error);
-    }, []);
 
     return (
 
