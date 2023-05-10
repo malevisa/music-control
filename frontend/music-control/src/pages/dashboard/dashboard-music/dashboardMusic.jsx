@@ -6,6 +6,7 @@ import ModalDeletarMusica from "../../../components/modals-components/modal-dele
 import ModalEditarMusica from "../../../components/modals-components/modal-edit-music/modalEditarMusica";
 import { musicUri } from "../../../service/musicApi";
 import { useLocation } from "react-router-dom";
+import * as ReactDOM from 'react-dom/client';
 
 function DashboardMusic() {
 
@@ -40,10 +41,37 @@ function DashboardMusic() {
         }
     }
 
+    function initMusicsModal(isEdit, music) {
+        const root = ReactDOM.createRoot(
+            document.getElementById("modal-box")
+        );
+
+        const element = isEdit ?
+            <ModalEditarMusica
+                key={music.idMusic}
+                idMusic={music.idMusic}
+                musicName={music.musicName}
+                musicArtist={music.musicArtist}
+                musicGenre={music.musicGenre}
+                instrument={music.instrument} />
+            : <ModalDeletarMusica
+                key={music.idMusic}
+                idMusic={music.idMusic}
+                musicName={music.musicName}
+                musicArtist={music.musicArtist}
+                musicGenre={music.musicGenre}
+                instrument={music.instrument} />;
+
+        root.render(element);
+
+    }
+
     function getMusicsByUser() {
         musicUri.get(`/music/${sessionStorage.getItem('idUser')}`).then((response) => {
             setMusics(response.data.listMusics === undefined ? [] : response.data.listMusics);
         }).catch((error) => {
+
+            console.log(error);
 
         })
     }
@@ -97,8 +125,8 @@ function DashboardMusic() {
                                         <td>{music.musicGenre}</td>
                                         <td>{music.instrument}</td>
                                         <td className="box_buttons">
-                                            <button onClick={() => initModal('modal-edit-music')}>Editar</button>
-                                            <button onClick={() => initModal('modal-delete-music')}>Deletar</button>
+                                            <button onClick={() => initMusicsModal(true, music)}>Editar</button>
+                                            <button onClick={() => initMusicsModal(false, music)}>Deletar</button>
                                         </td>
                                     </tr>
                                 );
@@ -108,10 +136,9 @@ function DashboardMusic() {
                 </div>
 
             </div>
+            <div id="modal-box"></div>
 
             <ModalCadastroMusica />
-            <ModalEditarMusica />
-            <ModalDeletarMusica />
 
         </>
     );

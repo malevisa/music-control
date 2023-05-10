@@ -15,10 +15,7 @@ function DashboardStatistics() {
 
             console.log(response);
 
-            if (response.data.mainInstruments === undefined ||
-                response.data.mainGenres === undefined ||
-                response.data.mainArtists === undefined
-            ) {
+            if (response.data !== "") {
                 fetchDataChartBar(response.data.mainInstruments);
                 fetchDataChartDoughnut(response.data.mainGenres);
                 fetchDataChartPolar(response.data.mainArtists);
