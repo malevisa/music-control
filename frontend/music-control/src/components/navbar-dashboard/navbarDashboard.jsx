@@ -4,6 +4,7 @@ import { FaMusic, FaUser, FaChartBar } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { userUri } from "../../service/userApi";
 
 export default function NavbarDashboard() {
 
@@ -22,60 +23,69 @@ export default function NavbarDashboard() {
         sidebar.classList.toggle("active");
     }
 
+    function logoff() {
+        userUri.patch('').then((respose) => {
+            sessionStorage.clear();
+            navigate("/");
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     return (
         <>
 
             {/* <div className="sidebar_content"> */}
-                <div className="sidebar">
-                    <div className="logo_content">
-                        <div id="btn" className="logo">
-                            <div className="logo_name">Music-Control</div>
-                        </div>
-                        <div className="btn_content">
-                            <AiOutlineMenu id="btn" onClick={() => activeSidebar(document.querySelector(".sidebar"))} />
-                        </div>
+            <div className="sidebar">
+                <div className="logo_content">
+                    <div id="btn" className="logo">
+                        <div className="logo_name">Music-Control</div>
                     </div>
-                    <ul className="nav_list">
-                        <li>
-                            <a href="" onClick={() => navigate('/your-musics')}>
-                                <div className="icons">
-                                    <FaMusic />
-                                </div>
-                                <span className="links_name">Músicas</span>
-                            </a>
-                            <span className="tooltip">Músicas</span>
-                        </li>
-                        <li>
-                            <a href="" onClick={() => navigate('/your-statistics')}>
-                                <div className="icons">
-                                    <FaChartBar />
-                                </div>
-                                <span className="links_name">Estatísticas</span>
-                            </a>
-                            <span className="tooltip">Estatísticas</span>
-                        </li>
-                        <li>
-                            <a href="" onClick={() => navigate('/your-perfil')}>
-                                <div className="icons">
-                                    <FaUser />
-                                </div>
-                                <span className="links_name">Perfil</span>
-                            </a>
-                            <span className="tooltip">Perfil</span>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a href="" onClick={() => navigate('/')}>
-                                <div className="icons">
-                                    <ImExit id="log_out" />
-                                </div>
-                                <span className="links_name">Sair</span>
-                            </a>
-                            <span className="tooltip">Sair</span>
-                        </li>
-                    </ul>
+                    <div className="btn_content">
+                        <AiOutlineMenu id="btn" onClick={() => activeSidebar(document.querySelector(".sidebar"))} />
+                    </div>
                 </div>
+                <ul className="nav_list">
+                    <li>
+                        <a onClick={() => navigate('/your-musics')}>
+                            <div className="icons">
+                                <FaMusic />
+                            </div>
+                            <span className="links_name">Músicas</span>
+                        </a>
+                        <span className="tooltip">Músicas</span>
+                    </li>
+                    <li>
+                        <a onClick={() => navigate('/your-statistics')}>
+                            <div className="icons">
+                                <FaChartBar />
+                            </div>
+                            <span className="links_name">Estatísticas</span>
+                        </a>
+                        <span className="tooltip">Estatísticas</span>
+                    </li>
+                    <li>
+                        <a onClick={() => navigate('/your-perfil')}>
+                            <div className="icons">
+                                <FaUser />
+                            </div>
+                            <span className="links_name">Perfil</span>
+                        </a>
+                        <span className="tooltip">Perfil</span>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a onClick={() => logoff()}>
+                            <div className="icons">
+                                <ImExit id="log_out" />
+                            </div>
+                            <span className="links_name">Sair</span>
+                        </a>
+                        <span className="tooltip">Sair</span>
+                    </li>
+                </ul>
+            </div>
             {/* </div> */}
 
         </>

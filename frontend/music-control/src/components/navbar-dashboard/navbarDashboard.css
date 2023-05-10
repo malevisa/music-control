@@ -78,6 +78,7 @@
 }
 
 .sidebar ul li a {
+    cursor: pointer;
     color: #fffcff;
     display: flex;
     align-items: center;
