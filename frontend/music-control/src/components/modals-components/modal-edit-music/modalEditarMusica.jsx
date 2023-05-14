@@ -90,6 +90,39 @@ export default function ModalEditMusic(props) {
 
         }).catch((error) => {
 
+            const boxNotification = document.getElementById('box-notification');
+
+            const root = ReactDOM.createRoot(
+                boxNotification
+            );
+
+            const errors = error.response.data;
+
+            const elements = []
+
+            errors.length > 0 ? Array.from(errors, (error, index) => {
+
+                elements[index] = <Notification
+                    key={index}
+                    status={false}
+                    title={error.campo == null ? "Erro" : error.campo}
+                    content={error.message}
+                />
+
+            }) : elements[0] = <Notification
+                key={0}
+                status={false}
+                title={errors.campo == null ? "Erro" : errors.campo}
+                content={errors.message}
+            />
+
+            root.render(elements);
+
+            const interval = setInterval(() => {
+                closeNotification();
+                clearInterval(interval);
+            }, 1000 * 7);
+
         })
 
     }
