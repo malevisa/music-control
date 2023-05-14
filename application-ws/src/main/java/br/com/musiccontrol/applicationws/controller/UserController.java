@@ -45,8 +45,8 @@ public class UserController {
                 new UserResponseDTO(
                         user.getIdUser(),
                         user.getUsername(),
-                        user.getEmail(),
                         user.getLogin(),
+                        user.getEmail(),
                         user.getDeleted()
                 )
         );
