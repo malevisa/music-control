@@ -8,6 +8,7 @@ import PlayingMusicBro from "../../assets/Playing-Music-bro.png";
 import Me from "../../assets/me.jpeg";
 import Navbar from "../../components/navbar/navbar";
 import './index.css';
+import { initModal } from "../../components/modals-components/modalComponentGlobal";
 
 function Index() {
 
@@ -16,23 +17,11 @@ function Index() {
         const register = document.querySelector('.register');
         const activateAccount = document.querySelector('.activate_account');
         if (login && register && activateAccount) {
-            login.addEventListener('click', () => iniciaModal('modal-login'));
-            register.addEventListener('click', () => iniciaModal('modal-register'));
-            activateAccount.addEventListener('click', () => iniciaModal('modal-activate-account'));
+            login.addEventListener('click', () => initModal('modal-login'));
+            register.addEventListener('click', () => initModal('modal-register'));
+            activateAccount.addEventListener('click', () => initModal('modal-activate-account'));
         }
     }, [])
-
-    function iniciaModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('show');
-            modal.addEventListener('click', (e) => {
-                if (e.target.id === modalId || e.target.className === 'close') {
-                    modal.classList.remove('show')
-                }
-            });
-        }
-    }
 
     function trocaTopico(topico) {
 
@@ -104,8 +93,8 @@ function Index() {
                                 a quantidade de músicas aprendidas, os instrumentos, nomes,
                                 gêneros e artistas.</span>
                             <div className="button_container">
-                                <button onClick={() => iniciaModal('modal-register')}>Cadastrar</button>
-                                <button onClick={() => iniciaModal('modal-login')}>Entrar</button>
+                                <button onClick={() => initModal('modal-register')}>Cadastrar</button>
+                                <button onClick={() => initModal('modal-login')}>Entrar</button>
                             </div>
                         </div>
                     </div>

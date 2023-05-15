@@ -4,6 +4,7 @@ import { musicUri } from "../../../service/musicApi";
 import Notification from "../../notification/notification";
 import { useNavigate } from "react-router-dom";
 import * as ReactDOM from 'react-dom/client';
+import { closeNotification } from "../../notification/notificationFunction";
 
 export default function ModalDeleteMusic(props) {
 
@@ -20,15 +21,6 @@ export default function ModalDeleteMusic(props) {
                     notification.item(0).classList.remove('show')
                 }
             })
-        }
-
-    }
-
-    function closeNotification() {
-        const notification = document.querySelectorAll('.show_notification');
-
-        for (let index = 0; index < notification.length; index++) {
-            notification.item(index).classList.remove('show_notification');
         }
 
     }

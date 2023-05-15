@@ -4,6 +4,7 @@ import Notification from "../../notification/notification";
 import { useNavigate } from "react-router-dom";
 import { userUri } from "../../../service/userApi";
 import * as ReactDOM from 'react-dom/client';
+import { closeNotification } from "../../notification/notificationFunction";
 
 export default function ModalLogin() {
 
@@ -11,15 +12,6 @@ export default function ModalLogin() {
     const [passwordInput, setPasswordInput] = useState();
 
     const navigate = useNavigate();
-
-    function closeNotification() {
-        const notification = document.querySelectorAll('.show_notification');
-
-        for (let index = 0; index < notification.length; index++) {
-            notification.item(index).classList.remove('show_notification');
-        }
-
-    }
 
     async function login(event) {
         event.preventDefault();

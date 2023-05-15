@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { musicUri } from "../../../service/musicApi";
 import Notification from "../../notification/notification";
 import * as ReactDOM from 'react-dom/client';
+import { closeNotification } from "../../notification/notificationFunction";
 
 export default function ModalEditMusic(props) {
 
@@ -16,14 +17,6 @@ export default function ModalEditMusic(props) {
         closeModal()
     })
 
-    // useEffect(() => {
-    //     const modal = document.getElementById('modal-edit-music');
-
-    //     if (modal) {
-    //         modal.classList.add('show');
-    //     }
-    // })
-
     function closeModal() {
         const notification = document.querySelectorAll('.show');
 
@@ -33,15 +26,6 @@ export default function ModalEditMusic(props) {
                     notification.item(0).classList.remove('show')
                 }
             })
-        }
-
-    }
-
-    function closeNotification() {
-        const notification = document.querySelectorAll('.show_notification');
-
-        for (let index = 0; index < notification.length; index++) {
-            notification.item(index).classList.remove('show_notification');
         }
 
     }

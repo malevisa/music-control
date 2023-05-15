@@ -8,6 +8,7 @@ import { musicUri } from "../../../service/musicApi";
 import { useLocation } from "react-router-dom";
 import * as ReactDOM from 'react-dom/client';
 import Notification from "../../../components/notification/notification";
+import { closeNotification } from "../../../components/notification/notificationFunction";
 
 function DashboardMusic() {
 
@@ -31,15 +32,6 @@ function DashboardMusic() {
     useEffect(() => {
         getMusicsByUser()
     }, [location.key])
-
-    function closeNotification() {
-        const notification = document.querySelectorAll('.show_notification');
-
-        for (let index = 0; index < notification.length; index++) {
-            notification.item(index).classList.remove('show_notification');
-        }
-
-    }
 
     function initModal(modalId) {
         const modal = document.getElementById(modalId);

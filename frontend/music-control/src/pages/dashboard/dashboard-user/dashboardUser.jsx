@@ -5,6 +5,8 @@ import { userUri } from "../../../service/userApi";
 import Notification from "../../../components/notification/notification";
 import * as ReactDOM from 'react-dom/client';
 import ModalDeleteAccount from "../../../components/modals-components/modal-delete-account/modalDeleteAccount";
+import { initModal } from "../../../components/modals-components/modalComponentGlobal";
+import { closeNotification } from "../../../components/notification/notificationFunction";
 
 function DashboardUser() {
 
@@ -18,27 +20,6 @@ function DashboardUser() {
             deleteAccount.addEventListener('click', () => initModal('modal-delete-account'));
         }
     }, [])
-
-    function initModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('show');
-            modal.addEventListener('click', (e) => {
-                if (e.target.id === modalId || e.target.className === 'close') {
-                    modal.classList.remove('show')
-                }
-            });
-        }
-    }
-
-    function closeNotification() {
-        const notification = document.querySelectorAll('.show_notification');
-
-        for (let index = 0; index < notification.length; index++) {
-            notification.item(index).classList.remove('show_notification');
-        }
-
-    }
 
     async function editUser(event) {
         event.preventDefault();

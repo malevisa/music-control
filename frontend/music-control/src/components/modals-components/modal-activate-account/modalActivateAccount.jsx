@@ -2,24 +2,13 @@ import React, { useState } from "react";
 import '../modalComponentGlobal.css'
 import Notification from "../../notification/notification";
 import * as ReactDOM from 'react-dom/client';
-import { useNavigate } from "react-router-dom";
 import { userUri } from "../../../service/userApi";
+import { closeNotification } from "../../notification/notificationFunction";
 
 export default function ModalActivateAccount() {
 
     const [loginInput, setLoginInput] = useState();
     const [emailInput, setEmailInput] = useState();
-
-    const navigate = useNavigate();
-
-    function closeNotification() {
-        const notification = document.querySelectorAll('.show_notification');
-
-        for (let index = 0; index < notification.length; index++) {
-            notification.item(index).classList.remove('show_notification');
-        }
-
-    }
 
     async function recoverUser(event) {
         event.preventDefault();

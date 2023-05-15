@@ -4,6 +4,7 @@ import '../modalComponentGlobal.css';
 import Notification from "../../notification/notification";
 import * as ReactDOM from 'react-dom/client';
 import { useNavigate } from "react-router-dom";
+import { closeNotification } from "../../notification/notificationFunction";
 
 export default function ModalRegisterMusic() {
 
@@ -13,15 +14,6 @@ export default function ModalRegisterMusic() {
     const [instrumentInput, setInstrumentInput] = useState();
 
     const navigate = useNavigate();
-
-    function closeNotification() {
-        const notification = document.querySelectorAll('.show_notification');
-
-        for (let index = 0; index < notification.length; index++) {
-            notification.item(index).classList.remove('show_notification');
-        }
-
-    }
 
     async function createMusic(event) {
         event.preventDefault();
