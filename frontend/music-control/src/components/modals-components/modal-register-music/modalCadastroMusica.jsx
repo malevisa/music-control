@@ -50,12 +50,19 @@ export default function ModalRegisterMusic() {
 
                 root.render(elements);
 
+                document.getElementById("titulo").value = '';
+                document.getElementById("artista").value = '';
+                document.getElementById("genero").value = '';
+                document.getElementById("instrumento").value = '';
+
                 const interval = setInterval(() => {
                     closeNotification();
                     navigate('/your-musics');
                     clearInterval(interval);
-                }, 1000 * 7);
+                }, 1000 * 3);
 
+                document.getElementById("search").value = '';
+                document.getElementById("field").value = 'invalidField';
             }
 
         }).catch((error) => {
