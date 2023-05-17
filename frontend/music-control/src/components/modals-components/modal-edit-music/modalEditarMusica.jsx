@@ -166,6 +166,9 @@ export default function ModalEditMusic(props) {
                     </div>
                 </div>
             </div>
+            <div id="box-notification" className="box_notification">
+
+            </div>
         </>
 
     );
