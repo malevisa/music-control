@@ -35,39 +35,63 @@ function Index() {
 
         switch (topico) {
             case 'objective':
+
                 buttonObjective.classList.add('activate');
-                buttonFunctionality.classList.remove('activate');
-                buttonUpdate.classList.remove('activate');
-                functionality.classList.remove('show');
-                functionality.classList.add('hide');
                 objective.classList.add('show');
                 objective.classList.remove('hide');
-                update.classList.remove('show');
-                update.classList.add('hide');
+
+                if (buttonFunctionality.classList.contains('activate') || buttonUpdate.classList.contains('activate')) {
+                    buttonFunctionality.classList.remove('activate');
+                    buttonUpdate.classList.remove('activate');
+                }
+
+                if (functionality.classList.contains('show') || update.classList.contains('show')) {
+                    functionality.classList.remove('show');
+                    update.classList.remove('show');
+
+                    functionality.classList.add('hide');
+                    update.classList.add('hide');
+                }
 
                 break;
             case 'functionality':
-                buttonObjective.classList.remove('activate');
-                buttonFunctionality.classList.add('activate');
-                buttonUpdate.classList.remove('activate');
 
+                buttonFunctionality.classList.add('activate');
                 functionality.classList.add('show');
                 functionality.classList.remove('hide');
-                objective.classList.remove('show');
-                objective.classList.add('hide');
-                update.classList.remove('show');
-                update.classList.add('hide');
+
+                if (buttonObjective.classList.contains('activate') || buttonUpdate.classList.contains('activate')) {
+                    buttonObjective.classList.remove('activate');
+                    buttonUpdate.classList.remove('activate');
+                }
+
+                if (objective.classList.contains('show') || update.classList.contains('show')) {
+                    objective.classList.remove('show');
+                    update.classList.remove('show');
+
+                    objective.classList.add('hide');
+                    update.classList.add('hide');
+                }
+
                 break;
             case 'update':
-                buttonObjective.classList.remove('activate');
-                buttonFunctionality.classList.remove('activate');
+
                 buttonUpdate.classList.add('activate');
-                functionality.classList.remove('show');
-                functionality.classList.add('hide');
-                objective.classList.remove('show');
-                objective.classList.add('hide');
                 update.classList.add('show');
                 update.classList.remove('hide');
+
+                if (buttonObjective.classList.contains('activate') || buttonFunctionality.classList.contains('activate')) {
+                    buttonObjective.classList.remove('activate');
+                    buttonFunctionality.classList.remove('activate');
+                }
+
+                if (objective.classList.contains('show') || functionality.classList.contains('show')) {
+                    objective.classList.remove('show');
+                    functionality.classList.remove('show');
+
+                    objective.classList.add('hide');
+                    functionality.classList.add('hide');
+                }
                 break;
 
             default:
