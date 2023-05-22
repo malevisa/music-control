@@ -10,4 +10,17 @@ function initModal(modalId) {
     }
 }
 
-export {initModal}
+function closeModal() {
+    const notification = document.querySelectorAll('.show');
+
+    if (notification.length === 1) {
+        notification.item(0).addEventListener('click', (e) => {
+            if (e.target.id === "modal-edit-music" || e.target.id === "modal-delete-music" || e.target.className === 'close') {
+                notification.item(0).classList.remove('show')
+            }
+        })
+    }
+
+}
+
+export { initModal, closeModal }

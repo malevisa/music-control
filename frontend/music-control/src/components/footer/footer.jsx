@@ -23,7 +23,7 @@ export default function Footer() {
                     <div>Info - Support - Marketing</div>
                     <div>Terms of Use - Privacy Policy</div>
                 </div>
-                <div className="date">@2023 Clarity Money</div>
+                <div className="date">@2023 Music-Control</div>
             </div>
         </>
         
