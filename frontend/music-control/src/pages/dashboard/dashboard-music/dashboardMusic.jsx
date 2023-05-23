@@ -7,8 +7,8 @@ import ModalEditarMusica from "../../../components/modals-components/modal-edit-
 import { musicUri } from "../../../service/musicApi";
 import { useLocation } from "react-router-dom";
 import * as ReactDOM from 'react-dom/client';
-import Notification from "../../../components/notification/notification";
-import { closeNotification } from "../../../components/notification/notificationFunction";
+import { closeNotification, generateNotification } from "../../../components/notification/notificationFunction";
+import { initModal } from "../../../components/modals-components/modalComponentGlobal";
 
 function DashboardMusic() {
 
@@ -19,31 +19,19 @@ function DashboardMusic() {
     const location = useLocation();
 
     useEffect(() => {
-        const cadastrarMusica = document.querySelector('.cadastro-musica');
-        const cadastro = document.querySelector('.editar-musica');
-        const activateAccount = document.querySelector('.activate_account');
-        if (cadastrarMusica && cadastro && activateAccount) {
-            cadastrarMusica.addEventListener('click', () => initModal('modal-register-music'));
-            cadastro.addEventListener('click', () => initModal('modal-delete-music'));
-            activateAccount.addEventListener('click', () => initModal('modal-edit-music'));
+        const registerMusic = document.querySelector('.registe_music');
+        const deleteMusic = document.querySelector('.delete_music');
+        const editMusic = document.querySelector('.edit_music');
+        if (registerMusic && deleteMusic && editMusic) {
+            registerMusic.addEventListener('click', () => initModal('modal-register-music'));
+            deleteMusic.addEventListener('click', () => initModal('modal-delete-music'));
+            editMusic.addEventListener('click', () => initModal('modal-edit-music'));
         }
     }, [])
 
     useEffect(() => {
         getMusicsByUser()
     }, [location.key])
-
-    function initModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('show');
-            modal.addEventListener('click', (e) => {
-                if (e.target.id === modalId || e.target.className === 'close') {
-                    modal.classList.remove('show')
-                }
-            });
-        }
-    }
 
     function initMusicsModal(isEdit, music) {
         const root = ReactDOM.createRoot(
@@ -75,7 +63,14 @@ function DashboardMusic() {
             setMusics(response.data.listMusics === undefined ? [] : response.data.listMusics);
         }).catch((error) => {
 
-            console.log(error);
+            const errors = error.response.data;
+
+            generateNotification(false, errors);
+
+            const interval = setInterval(() => {
+                closeNotification();
+                clearInterval(interval);
+            }, 1000 * 7);
 
         })
     }
@@ -86,33 +81,9 @@ function DashboardMusic() {
             setMusics(response.data.listMusics === undefined ? [] : response.data.listMusics);
         }).catch((error) => {
 
-            const boxNotification = document.getElementById('box-notification');
-
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
-
             const errors = error.response.data;
 
-            const elements = []
-
-            errors.length > 0 ? Array.from(errors, (error, index) => {
-
-                elements[index] = <Notification
-                    key={index}
-                    status={false}
-                    title={error.campo == null ? "Erro" : error.campo}
-                    content={error.message}
-                />
-
-            }) : elements[0] = <Notification
-                key={0}
-                status={false}
-                title={errors.campo == null ? "Erro" : errors.campo}
-                content={errors.message}
-            />
-
-            root.render(elements);
+            generateNotification(false, errors);
 
             const interval = setInterval(() => {
                 closeNotification();
