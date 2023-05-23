@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import '../dashboard-user/dashboardUser.css'
 import NavbarDashboard from "../../../components/navbar-dashboard/navbarDashboard";
 import { userUri } from "../../../service/userApi";
-import Notification from "../../../components/notification/notification";
-import * as ReactDOM from 'react-dom/client';
 import ModalDeleteAccount from "../../../components/modals-components/modal-delete-account/modalDeleteAccount";
 import { initModal } from "../../../components/modals-components/modalComponentGlobal";
-import { closeNotification } from "../../../components/notification/notificationFunction";
+import { closeNotification, generateNotification } from "../../../components/notification/notificationFunction";
 
 function DashboardUser() {
 
@@ -24,20 +22,20 @@ function DashboardUser() {
     async function editUser(event) {
         event.preventDefault();
 
-        const objFormatado = {
+        const obj = {
             username: usernameInput,
             login: loginInput,
             email: emailInput
         };
 
-        userUri.put(`/${sessionStorage.getItem('idUser')}`, objFormatado).then((response) => {
-            console.log(response);
+        userUri.put(`/${sessionStorage.getItem('idUser')}`, obj).then((response) => {
 
-            const boxNotification = document.getElementById('box-notification');
-            const elements = [];
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
+            const data = {
+                title: "Sucesso",
+                content: "Informações atualizadas com sucesso!"
+            }
+
+            generateNotification(true, data);
 
             sessionStorage.removeItem('username');
             sessionStorage.removeItem('login');
@@ -47,15 +45,6 @@ function DashboardUser() {
             sessionStorage.setItem('login', response.data.login);
             sessionStorage.setItem('email', response.data.email);
 
-            elements[0] = <Notification
-                key={0}
-                status={true}
-                title={"Sucesso"}
-                content={"Informações atualizadas com sucesso!"}
-            />
-
-            root.render(elements);
-
             const interval = setInterval(() => {
                 closeNotification();
                 clearInterval(interval);
@@ -64,32 +53,9 @@ function DashboardUser() {
 
         }).catch((error) => {
 
-            console.log(error)
-
-            const boxNotification = document.getElementById('box-notification');
             const errors = error.response.data;
-            const elements = [];
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
 
-            errors.length > 0 ? Array.from(errors, (error, index) => {
-
-                elements[index] = <Notification
-                    key={index}
-                    status={false}
-                    title={error.campo == null ? "Erro" : error.campo}
-                    content={error.message}
-                />
-
-            }) : elements[0] = <Notification
-                key={0}
-                status={false}
-                title={errors.campo == null ? "Erro" : errors.campo}
-                content={errors.message}
-            />
-
-            root.render(elements);
+            generateNotification(false, errors);
 
             const interval = setInterval(() => {
                 closeNotification();
