@@ -13,8 +13,6 @@ function DashboardStatistics() {
     function getUserStatistics() {
         musicUri.get(`/user/${sessionStorage.getItem('idUser')}`).then((response) => {
 
-            console.log(response);
-
             if (response.data !== "") {
                 fetchDataChartBar(response.data.mainInstruments);
                 fetchDataChartDoughnut(response.data.mainGenres);
