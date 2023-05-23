@@ -23,7 +23,7 @@ function Index() {
         }
     }, [])
 
-    function trocaTopico(topico) {
+    function alterTopic(topic) {
 
         const objective = document.getElementById('objective');
         const functionality = document.getElementById('functionality');
@@ -33,7 +33,7 @@ function Index() {
         const buttonFunctionality = document.getElementById('functionalityButton');
         const buttonUpdate = document.getElementById('updateButton');
 
-        switch (topico) {
+        switch (topic) {
             case 'objective':
 
                 buttonObjective.classList.add('activate');
@@ -126,9 +126,9 @@ function Index() {
                         <div className="container">
                             <h1>Conheça o projeto</h1>
                             <div className="topics_container">
-                                <button className="activate" id="objectiveButton" onClick={() => trocaTopico("objective")}>Objetivos</button>
-                                <button id="functionalityButton" onClick={() => trocaTopico("functionality")}>Funcionalidades</button>
-                                <button id="updateButton" onClick={() => trocaTopico("update")}>Futuras Atualizações</button>
+                                <button className="activate" id="objectiveButton" onClick={() => alterTopic("objective")}>Objetivos</button>
+                                <button id="functionalityButton" onClick={() => alterTopic("functionality")}>Funcionalidades</button>
+                                <button id="updateButton" onClick={() => alterTopic("update")}>Futuras Atualizações</button>
                             </div>
                             <div>
                                 <nav className="show" id="objective">
