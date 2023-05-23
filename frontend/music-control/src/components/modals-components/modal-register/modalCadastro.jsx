@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { userUri } from "../../../service/userApi"
 import '../modalComponentGlobal.css'
 import { useNavigate } from "react-router-dom";
-import * as ReactDOM from 'react-dom/client';
-import Notification from "../../notification/notification";
-import { closeNotification } from "../../notification/notificationFunction";
+import { closeNotification, generateNotification } from "../../notification/notificationFunction";
 
 export default function ModalRegister() {
 
@@ -26,7 +24,6 @@ export default function ModalRegister() {
         };
 
         userUri.post('', objFormatado).then((response) => {
-            console.log(response);
 
             sessionStorage.setItem('idUser', response.data.idUser);
             sessionStorage.setItem('username', response.data.username);
@@ -37,40 +34,16 @@ export default function ModalRegister() {
 
             navigate("/your-musics");
 
-            emailInput.value("");
-            loginInput.value("");
-            usernameInput.value("");
-            passwordInput.value("");
+            document.getElementById("name").value = '';
+            document.getElementById("login").value = '';
+            document.getElementById("email").value = '';
+            document.getElementById("password").value = '';
 
         }).catch((error) => {
 
-            const boxNotification = document.getElementById('box-notification');
-
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
-
             const errors = error.response.data;
 
-            const elements = []
-
-            errors.length > 0 ? Array.from(errors, (error, index) => {
-
-                elements[index] = <Notification
-                    key={index}
-                    status={false}
-                    title={error.campo == null ? "Erro" : error.campo}
-                    content={error.message}
-                />
-
-            }) : elements[0] = <Notification
-                key={0}
-                status={false}
-                title={errors.campo == null ? "Erro" : errors.campo}
-                content={errors.message}
-            />
-
-            root.render(elements);
+            generateNotification(false, errors)
 
             const interval = setInterval(() => {
                 closeNotification();
@@ -91,7 +64,7 @@ export default function ModalRegister() {
 
                         <form onSubmit={createUserFunction}>
                             <div className="single_input">
-                                <input required className="input" type="text" id="nome" onChange={(evento) => setUsernameInput(evento.target.value)} /> <label htmlFor="nome">Nome Completo</label>
+                                <input required className="input" type="text" id="name" onChange={(evento) => setUsernameInput(evento.target.value)} /> <label htmlFor="name">Nome Completo</label>
                             </div>
                             <div className="single_input">
                                 <input required className="input" type="text" id="login" onChange={(evento) => setLoginInput(evento.target.value)} /> <label htmlFor="login">Login</label>
@@ -100,7 +73,7 @@ export default function ModalRegister() {
                                 <input required className="input" type="text" id="email" onChange={(evento) => setEmailInput(evento.target.value)} /> <label htmlFor="email">E-mail</label>
                             </div>
                             <div className="single_input">
-                                <input required className="input" type="password" id="senha" onChange={(evento) => setPasswordInput(evento.target.value)} /> <label htmlFor="senha">Senha</label>
+                                <input required className="input" type="password" id="password" onChange={(evento) => setPasswordInput(evento.target.value)} /> <label htmlFor="password">Senha</label>
                             </div>
                             <button type="submit" className="button">Cadastrar</button>
                         </form>

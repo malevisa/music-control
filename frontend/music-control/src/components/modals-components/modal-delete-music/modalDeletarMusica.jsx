@@ -1,29 +1,14 @@
 import React, { useEffect } from "react";
 import '../modalComponentGlobal.css'
 import { musicUri } from "../../../service/musicApi";
-import Notification from "../../notification/notification";
-import { useNavigate } from "react-router-dom";
-import * as ReactDOM from 'react-dom/client';
-import { closeNotification } from "../../notification/notificationFunction";
+import { closeNotification, generateNotification } from "../../notification/notificationFunction";
+import { closeModal } from "../modalComponentGlobal";
 
 export default function ModalDeleteMusic(props) {
 
     useEffect(() => {
         closeModal()
     })
-
-    function closeModal() {
-        const notification = document.querySelectorAll('.show');
-
-        if (notification.length === 1) {
-            notification.item(0).addEventListener('click', (e) => {
-                if (e.target.id === "modal-edit-music" || e.target.className === 'close') {
-                    notification.item(0).classList.remove('show')
-                }
-            })
-        }
-
-    }
 
     function deleteMusic() {
 
@@ -32,60 +17,26 @@ export default function ModalDeleteMusic(props) {
             document.getElementById('modal-delete-music').classList.remove('show');
 
             if (response) {
-                const boxNotification = document.getElementById('box-notification');
+                const data = {
+                    title: "Sucesso",
+                    content: "Música deletada com sucesso!"
+                }
 
-                const root = ReactDOM.createRoot(
-                    boxNotification
-                );
-
-                const elements = []
-
-                elements[0] = <Notification
-                    key={0}
-                    status={true}
-                    title={"Sucesso"}
-                    content={"Música deletada com sucesso!"}
-                />
-
-                root.render(elements);
+                generateNotification(true, data);
 
                 const interval = setInterval(() => {
                     closeNotification();
                     window.location.reload();
                     clearInterval(interval);
-                }, 1000 * 7);
+                }, 1000 * 3);
 
             }
 
         }).catch((error) => {
 
-            const boxNotification = document.getElementById('box-notification');
-
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
-
             const errors = error.response.data;
 
-            const elements = []
-
-            errors.length > 0 ? Array.from(errors, (error, index) => {
-
-                elements[index] = <Notification
-                    key={index}
-                    status={false}
-                    title={error.campo == null ? "Erro" : error.campo}
-                    content={error.message}
-                />
-
-            }) : elements[0] = <Notification
-                key={0}
-                status={false}
-                title={errors.campo == null ? "Erro" : errors.campo}
-                content={errors.message}
-            />
-
-            root.render(elements);
+            generateNotification(false, errors);
 
             const interval = setInterval(() => {
                 closeNotification();

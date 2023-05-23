@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import '../modalComponentGlobal.css'
-import { useNavigate } from "react-router-dom";
 import { musicUri } from "../../../service/musicApi";
-import Notification from "../../notification/notification";
-import * as ReactDOM from 'react-dom/client';
-import { closeNotification } from "../../notification/notificationFunction";
+import { closeNotification, generateNotification } from "../../notification/notificationFunction";
+import { closeModal } from "../modalComponentGlobal";
 
 export default function ModalEditMusic(props) {
 
@@ -16,19 +14,6 @@ export default function ModalEditMusic(props) {
     useEffect(() => {
         closeModal()
     })
-
-    function closeModal() {
-        const notification = document.querySelectorAll('.show');
-
-        if (notification.length === 1) {
-            notification.item(0).addEventListener('click', (e) => {
-                if (e.target.id === "modal-edit-music" || e.target.className === 'close') {
-                    notification.item(0).classList.remove('show')
-                }
-            })
-        }
-
-    }
 
     async function editMusic(event) {
 
@@ -47,60 +32,27 @@ export default function ModalEditMusic(props) {
             document.getElementById('modal-edit-music').classList.remove('show');
 
             if (response) {
-                const boxNotification = document.getElementById('box-notification');
 
-                const root = ReactDOM.createRoot(
-                    boxNotification
-                );
+                const data = {
+                    title: "Sucesso",
+                    content: "Música editada com sucesso!"
+                }
 
-                const elements = []
-
-                elements[0] = <Notification
-                    key={0}
-                    status={true}
-                    title={"Sucesso"}
-                    content={"Música editada com sucesso!"}
-                />
-
-                root.render(elements);
+                generateNotification(true, data);
 
                 const interval = setInterval(() => {
                     closeNotification();
                     window.location.reload();
                     clearInterval(interval);
-                }, 1000 * 7);
+                }, 1000 * 3);
 
             }
 
         }).catch((error) => {
 
-            const boxNotification = document.getElementById('box-notification');
-
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
-
             const errors = error.response.data;
 
-            const elements = []
-
-            errors.length > 0 ? Array.from(errors, (error, index) => {
-
-                elements[index] = <Notification
-                    key={index}
-                    status={false}
-                    title={error.campo == null ? "Erro" : error.campo}
-                    content={error.message}
-                />
-
-            }) : elements[0] = <Notification
-                key={0}
-                status={false}
-                title={errors.campo == null ? "Erro" : errors.campo}
-                content={errors.message}
-            />
-
-            root.render(elements);
+            generateNotification(false, errors)
 
             const interval = setInterval(() => {
                 closeNotification();
@@ -128,8 +80,8 @@ export default function ModalEditMusic(props) {
                                     required
                                     className="input"
                                     type="text"
-                                    id="titulo" />
-                                <label htmlFor="titulo">Título</label>
+                                    id="title" />
+                                <label htmlFor="title">Título</label>
                             </div>
                             <div className="single_input">
                                 <input
@@ -138,8 +90,8 @@ export default function ModalEditMusic(props) {
                                     required
                                     className="input"
                                     type="text"
-                                    id="artista" />
-                                <label htmlFor="artista">Artista</label>
+                                    id="artist" />
+                                <label htmlFor="artist">Artista</label>
                             </div>
                             <div className="single_input">
                                 <input
@@ -148,8 +100,8 @@ export default function ModalEditMusic(props) {
                                     required
                                     className="input"
                                     type="text"
-                                    id="genero" />
-                                <label htmlFor="genero">Gênero</label>
+                                    id="genre" />
+                                <label htmlFor="genre">Gênero</label>
                             </div>
                             <div className="single_input">
                                 <input
@@ -158,8 +110,8 @@ export default function ModalEditMusic(props) {
                                     required
                                     className="input"
                                     type="text"
-                                    id="instrumento" />
-                                <label htmlFor="instrumento">Instrumento</label>
+                                    id="instrument" />
+                                <label htmlFor="instrument">Instrumento</label>
                             </div>
                             <button type="submit" className="button">Editar música</button>
                         </form>

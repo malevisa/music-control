@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import '../modalComponentGlobal.css'
-import Notification from "../../notification/notification";
 import { useNavigate } from "react-router-dom";
 import { userUri } from "../../../service/userApi";
-import * as ReactDOM from 'react-dom/client';
-import { closeNotification } from "../../notification/notificationFunction";
+import { closeNotification, generateNotification } from "../../notification/notificationFunction";
 
 export default function ModalLogin() {
 
@@ -22,7 +20,6 @@ export default function ModalLogin() {
         };
 
         userUri.post('/user', objFormatado).then((response) => {
-            console.log(response);
 
             sessionStorage.setItem('idUser', response.data.idUser);
             sessionStorage.setItem('username', response.data.username);
@@ -33,35 +30,14 @@ export default function ModalLogin() {
 
             navigate("/your-musics");
 
-            loginInput.value("");
-            passwordInput.value("");
+            document.getElementById("login").value = '';
+            document.getElementById("password").value = '';
 
         }).catch((error) => {
 
-            const boxNotification = document.getElementById('box-notification');
             const errors = error.response.data;
-            const elements = [];
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
 
-            errors.length > 0 ? Array.from(errors, (error, index) => {
-
-                elements[index] = <Notification
-                    key={index}
-                    status={false}
-                    title={error.campo == null ? "Erro" : error.campo}
-                    content={error.message}
-                />
-
-            }) : elements[0] = <Notification
-                key={0}
-                status={false}
-                title={errors.campo == null ? "Erro" : errors.campo}
-                content={errors.message}
-            />
-
-            root.render(elements);
+            generateNotification(false, errors);
 
             const interval = setInterval(() => {
                 closeNotification();
@@ -86,7 +62,7 @@ export default function ModalLogin() {
                                 <input onChange={(event) => setLoginInput(event.target.value)} required className="input" type="text" id="login" /> <label htmlFor="login">Login</label>
                             </div>
                             <div className="single_input">
-                                <input onChange={(event) => setPasswordInput(event.target.value)} required className="input" type="password" id="senha" /> <label htmlFor="senha">Senha</label>
+                                <input onChange={(event) => setPasswordInput(event.target.value)} required className="input" type="password" id="password" /> <label htmlFor="password">Senha</label>
                             </div>
                             <button type="submit" className="button">Entrar</button>
                         </form>

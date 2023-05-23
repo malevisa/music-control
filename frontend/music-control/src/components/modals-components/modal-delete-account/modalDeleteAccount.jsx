@@ -2,9 +2,7 @@ import React from "react";
 import '../modalComponentGlobal.css'
 import { useNavigate } from "react-router-dom";
 import { userUri } from "../../../service/userApi";
-import Notification from "../../notification/notification";
-import * as ReactDOM from 'react-dom/client';
-import { closeNotification } from "../../notification/notificationFunction";
+import { closeNotification, generateNotification } from "../../notification/notificationFunction";
 
 export default function ModalDeleteAccount(props) {
 
@@ -13,55 +11,24 @@ export default function ModalDeleteAccount(props) {
     function deleteAccount() {
         userUri.delete(`/${props.idUser}`).then((response) => {
 
-            const boxNotification = document.getElementById('box-notification');
-            const elements = [];
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
+            const data = {
+                title: "Sucesso",
+                content: response.data
+            }
 
-            elements[0] = <Notification
-                key={0}
-                status={true}
-                title={"Sucesso"}
-                content={response.data}
-            />
-
-            root.render(elements);
+            generateNotification(true, data);
 
             const interval = setInterval(() => {
                 sessionStorage.clear();
                 navigate("/");
                 clearInterval(interval);
-            }, 1000 * 3);
+            }, 1000 * 1);
 
         }).catch((error) => {
 
-            console.log(error)
-
-            const boxNotification = document.getElementById('box-notification');
             const errors = error.response.data;
-            const elements = [];
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
 
-            errors.length > 0 ? Array.from(errors, (error, index) => {
-
-                elements[index] = <Notification
-                    key={index}
-                    status={false}
-                    title={error.campo == null ? "Erro" : error.campo}
-                    content={error.message}
-                />
-
-            }) : elements[0] = <Notification
-                key={0}
-                status={false}
-                title={errors.campo == null ? "Erro" : errors.campo}
-                content={errors.message}
-            />
-
-            root.render(elements);
+            generateNotification(false, errors)
 
             const interval = setInterval(() => {
                 closeNotification();

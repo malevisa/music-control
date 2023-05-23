@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import '../modalComponentGlobal.css'
-import Notification from "../../notification/notification";
-import * as ReactDOM from 'react-dom/client';
 import { userUri } from "../../../service/userApi";
-import { closeNotification } from "../../notification/notificationFunction";
+import { closeNotification, generateNotification } from "../../notification/notificationFunction";
 
 export default function ModalActivateAccount() {
 
@@ -19,61 +17,32 @@ export default function ModalActivateAccount() {
         };
 
         userUri.put('', objFormatado).then((response) => {
-            console.log(response);
 
             document.getElementById('modal-activate-account').classList.remove('show');
 
             if (!response.data.deleted) {
-                const boxNotification = document.getElementById('box-notification');
-                const elements = [];
-                const root = ReactDOM.createRoot(
-                    boxNotification
-                );
 
-                elements[0] = <Notification
-                    key={0}
-                    status={true}
-                    title={"Sucesso"}
-                    content={"Usuário recuperado com sucesso!"}
-                />
+                const data = {
+                    title: "Sucesso",
+                    content: "Usuário recuperado com sucesso!"
+                }
 
-                root.render(elements);
+                generateNotification(true, data)
 
                 const interval = setInterval(() => {
                     closeNotification();
                     clearInterval(interval);
-                }, 1000 * 7);
+                }, 1000 * 3);
 
-                loginInput.value("");
-                emailInput.value("");
+                document.getElementById("login").value = '';
+                document.getElementById("email").value = '';
             }
 
         }).catch((error) => {
 
-            const boxNotification = document.getElementById('box-notification');
             const errors = error.response.data;
-            const elements = [];
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
 
-            errors.length > 0 ? Array.from(errors, (error, index) => {
-
-                elements[index] = <Notification
-                    key={index}
-                    status={false}
-                    title={error.campo == null ? "Erro" : error.campo}
-                    content={error.message}
-                />
-
-            }) : elements[0] = <Notification
-                key={0}
-                status={false}
-                title={errors.campo == null ? "Erro" : errors.campo}
-                content={errors.message}
-            />
-
-            root.render(elements);
+            generateNotification(false, errors);
 
             const interval = setInterval(() => {
                 closeNotification();
