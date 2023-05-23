@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { musicUri } from '../../../service/musicApi'
 import '../modalComponentGlobal.css';
-import Notification from "../../notification/notification";
-import * as ReactDOM from 'react-dom/client';
 import { useNavigate } from "react-router-dom";
-import { closeNotification } from "../../notification/notificationFunction";
+import { closeNotification, generateNotification } from "../../notification/notificationFunction";
 
 export default function ModalRegisterMusic() {
 
@@ -26,34 +24,23 @@ export default function ModalRegisterMusic() {
             instrument: instrumentInput
         }
 
-        console.log(obj);
-
         musicUri.post('', obj).then((response) => {
 
             document.getElementById('modal-register-music').classList.remove('show');
 
             if (response) {
-                const boxNotification = document.getElementById('box-notification');
 
-                const root = ReactDOM.createRoot(
-                    boxNotification
-                );
+                const data = {
+                    title: "Sucesso",
+                    content: "Música cadastrada com sucesso!"
+                }
 
-                const elements = []
+                generateNotification(true, data);
 
-                elements[0] = <Notification
-                    key={0}
-                    status={true}
-                    title={"Sucesso"}
-                    content={"Música cadastrada com sucesso!"}
-                />
-
-                root.render(elements);
-
-                document.getElementById("titulo").value = '';
-                document.getElementById("artista").value = '';
-                document.getElementById("genero").value = '';
-                document.getElementById("instrumento").value = '';
+                document.getElementById("title").value = '';
+                document.getElementById("artist").value = '';
+                document.getElementById("genre").value = '';
+                document.getElementById("instrument").value = '';
 
                 const interval = setInterval(() => {
                     closeNotification();
@@ -67,33 +54,9 @@ export default function ModalRegisterMusic() {
 
         }).catch((error) => {
 
-            const boxNotification = document.getElementById('box-notification');
-
-            const root = ReactDOM.createRoot(
-                boxNotification
-            );
-
             const errors = error.response.data;
 
-            const elements = []
-
-            errors.length > 0 ? Array.from(errors, (error, index) => {
-
-                elements[index] = <Notification
-                    key={index}
-                    status={false}
-                    title={error.campo == null ? "Erro" : error.campo}
-                    content={error.message}
-                />
-
-            }) : elements[0] = <Notification
-                key={0}
-                status={false}
-                title={errors.campo == null ? "Erro" : errors.campo}
-                content={errors.message}
-            />
-
-            root.render(elements);
+            generateNotification(false, errors);
 
             const interval = setInterval(() => {
                 closeNotification();
@@ -115,16 +78,16 @@ export default function ModalRegisterMusic() {
                         {/* <div className="form"> */}
                         <form onSubmit={createMusic}>
                             <div className="single_input">
-                                <input onChange={(event) => setTitleInput(event.target.value)} required className="input" type="text" id="titulo" /> <label htmlFor="titulo">Título</label>
+                                <input onChange={(event) => setTitleInput(event.target.value)} required className="input" type="text" id="title" /> <label htmlFor="title">Título</label>
                             </div>
                             <div className="single_input">
-                                <input onChange={(event) => setArtistInput(event.target.value)} required className="input" type="text" id="artista" /> <label htmlFor="artista">Artista</label>
+                                <input onChange={(event) => setArtistInput(event.target.value)} required className="input" type="text" id="artist" /> <label htmlFor="artist">Artista</label>
                             </div>
                             <div className="single_input">
-                                <input onChange={(event) => setGenreInput(event.target.value)} required className="input" type="text" id="genero" /> <label htmlFor="genero">Gênero</label>
+                                <input onChange={(event) => setGenreInput(event.target.value)} required className="input" type="text" id="genre" /> <label htmlFor="genre">Gênero</label>
                             </div>
                             <div className="single_input">
-                                <input onChange={(event) => setInstrumentInput(event.target.value)} required className="input" type="text" id="instrumento" /> <label htmlFor="instrumento">Instrumento</label>
+                                <input onChange={(event) => setInstrumentInput(event.target.value)} required className="input" type="text" id="instrument" /> <label htmlFor="instrument">Instrumento</label>
                             </div>
 
                             <button type="submit" className="button">Cadastrar música</button>
