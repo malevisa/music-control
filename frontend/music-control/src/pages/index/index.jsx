@@ -141,8 +141,7 @@ function Index() {
                                 <nav id="functionality" className="hide">
                                     <ul>
                                         <li>Criar, deletar e editar suas músicas.</li>
-                                        <li>Ordenar o repertório por: Nome da música, Artista, Gênero e
-                                            Instrumento.</li>
+                                        <li>Verificar estatísticas do repertório.</li>
                                         <li>Filtrar músicas pelas informções.</li>
                                     </ul>
                                 </nav>
